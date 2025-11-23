@@ -10,9 +10,7 @@
       "import": "./dist/index.esm.js",
       "require": "./dist/index.cjs.js",
       "types": "./dist/index.d.ts"
-    },
-    "./preset": "./dist/preset.js",
-    "./tokens.css": "./dist/tokens.css"
+    }
   },
   "files": [
     "dist"

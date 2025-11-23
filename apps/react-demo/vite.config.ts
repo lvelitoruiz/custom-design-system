@@ -13,12 +13,12 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: '@luisvelito/react/tokens.css',
-        replacement: path.resolve(__dirname, '../../packages/react/src/tokens.css')
+        find: '@luisvelito/tokens/tokens.css',
+        replacement: path.resolve(__dirname, '../../packages/tokens/src/tokens.css')
       },
       {
-        find: '@luisvelito/react/preset',
-        replacement: path.resolve(__dirname, '../../packages/react/src/preset.js')
+        find: '@luisvelito/tokens/tailwind-preset',
+        replacement: path.resolve(__dirname, '../../packages/tokens/src/tailwind-preset.js')
       },
       {
         find: '@luisvelito/react',

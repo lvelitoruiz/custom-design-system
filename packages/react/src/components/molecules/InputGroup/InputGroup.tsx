@@ -14,8 +14,8 @@ export const InputGroup: React.FC<InputGroupProps> = ({
       className={cn(
         'flex items-stretch w-full',
         'rounded-lg overflow-hidden',
-        'border border-[hsl(var(--border))]',
-        'focus-within:ring-2 focus-within:ring-[hsl(var(--ring))] focus-within:ring-offset-0',
+        'border border-gray-300 dark:border-gray-600',
+        'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-0',
         'transition-all duration-200',
         className
       )}
@@ -24,9 +24,9 @@ export const InputGroup: React.FC<InputGroupProps> = ({
         <div
           className={cn(
             'flex items-center justify-center',
-            'bg-[hsl(var(--muted))] text-[hsl(var(--foreground))]',
-            'px-3 py-2 text-sm',
-            'border-r border-[hsl(var(--border))]',
+            'bg-primary text-primary-foreground',
+            'px-4 py-2.5 text-sm font-medium',
+            'border-r-0',
             'transition-colors duration-200'
           )}
         >
@@ -34,7 +34,7 @@ export const InputGroup: React.FC<InputGroupProps> = ({
         </div>
       )}
       
-      <div className="flex-1 [&>input]:border-0 [&>input]:focus-visible:ring-0 [&>input]:focus-visible:ring-offset-0 [&>input]:rounded-none">
+      <div className="flex-1 [&_input]:border-0 [&_input]:focus:ring-0 [&_input]:focus-visible:ring-0 [&_input]:focus-visible:ring-offset-0 [&_input]:rounded-none [&_input]:shadow-none [&>*]:flex-1">
         {children}
       </div>
       
@@ -42,9 +42,9 @@ export const InputGroup: React.FC<InputGroupProps> = ({
         <div
           className={cn(
             'flex items-center justify-center',
-            'bg-[hsl(var(--muted))] text-[hsl(var(--foreground))]',
-            'px-3 py-2 text-sm',
-            'border-l border-[hsl(var(--border))]',
+            'bg-primary text-primary-foreground',
+            'px-4 py-2.5 text-sm font-medium',
+            'border-l-0',
             'transition-colors duration-200'
           )}
         >

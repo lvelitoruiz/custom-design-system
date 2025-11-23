@@ -1,5 +1,5 @@
 /* Import design system tokens */
-@import "@luisvelito/react/tokens.css";
+@import "@luisvelito/tokens/tokens.css";
 
 @import "tailwindcss/base";
 @import "tailwindcss/components";

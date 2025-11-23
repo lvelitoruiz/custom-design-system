@@ -11,7 +11,9 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./tailwind-preset": "./dist/tailwind-preset.js",
+    "./tokens.css": "./dist/tokens.css"
   },
   "files": [
     "dist"

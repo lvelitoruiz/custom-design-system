@@ -72,6 +72,77 @@ const App = () => {
   const [currentPage2, setCurrentPage2] = useState(1);
   const [currentPage3, setCurrentPage3] = useState(5);
 
+  // New Phase 2 states
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+  const [phoneValue, setPhoneValue] = useState('');
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [isPhoneValid, setIsPhoneValid] = useState(true);
+  const [loadingInput, setLoadingInput] = useState(false);
+  const [textareaValue, setTextareaValue] = useState('');
+  const [autoResizeValue, setAutoResizeValue] = useState('');
+  const [selectValue, setSelectValue] = useState('');
+  const [searchableSelectValue, setSearchableSelectValue] = useState('');
+  const [multiSelectValue, setMultiSelectValue] = useState('');
+  const [checkboxIndeterminate, setCheckboxIndeterminate] = useState(false);
+  const [checkboxGroup, setCheckboxGroup] = useState({
+    option1: false,
+    option2: true,
+    option3: false,
+    option4: false
+  });
+
+  // Helper functions for Phase 2
+  const selectOptions = [
+    { label: 'Option 1', value: '1' },
+    { label: 'Option 2', value: '2' },
+    { label: 'Option 3', value: '3' },
+    { label: 'Option 4 (Disabled)', value: '4', disabled: true },
+    { label: 'Option 5', value: '5' }
+  ];
+
+  const countryOptions = [
+    { label: 'United States', value: 'us' },
+    { label: 'Canada', value: 'ca' },
+    { label: 'Mexico', value: 'mx' },
+    { label: 'United Kingdom', value: 'uk' },
+    { label: 'Germany', value: 'de' },
+    { label: 'France', value: 'fr' },
+    { label: 'Spain', value: 'es' },
+    { label: 'Italy', value: 'it' },
+    { label: 'Japan', value: 'jp' },
+    { label: 'Australia', value: 'au' },
+    { label: 'Brazil', value: 'br' },
+    { label: 'India', value: 'in' }
+  ];
+
+  const simulateLoading = () => {
+    setLoadingInput(true);
+    setTimeout(() => setLoadingInput(false), 2000);
+  };
+
+  const handleCheckboxGroupChange = (key: keyof typeof checkboxGroup) => {
+    setCheckboxGroup(prev => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const selectedCount = Object.values(checkboxGroup).filter(Boolean).length;
+  const totalCount = Object.keys(checkboxGroup).length;
+  const isAllSelected = selectedCount === totalCount;
+  const isNoneSelected = selectedCount === 0;
+  const isSomeSelected = selectedCount > 0 && selectedCount < totalCount;
+
+  const handleSelectAllChange = (checked: boolean) => {
+    // Simple logic: just use the checked value from the checkbox
+    // The indeterminate state is only visual, the actual checked state drives the behavior
+    setCheckboxGroup({
+      option1: checked,
+      option2: checked,
+      option3: checked,
+      option4: checked
+    });
+  };
+
   const toggleTheme = () => {
     const newTheme = !isDark;
     setIsDark(newTheme);
@@ -124,6 +195,30 @@ const App = () => {
 
       <div className="max-w-7xl mx-auto p-6 space-y-12">
         
+        {/* HEADER SECTION */}
+        <section className="text-center">
+          <div className="max-w-4xl mx-auto">
+            <p className="text-lg text-muted-foreground mb-6">
+              Comprehensive React component library with advanced functionalities including validation, auto-resize, 
+              keyboard navigation, and custom dropdown implementations.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+              <div className="p-4 bg-card rounded-lg border">
+                <h4 className="font-semibold text-primary mb-2">✨ Phase 2 Features</h4>
+                <p className="text-muted-foreground">Advanced validation, loading states, auto-resize, and custom dropdowns</p>
+              </div>
+              <div className="p-4 bg-card rounded-lg border">
+                <h4 className="font-semibold text-primary mb-2">⌨️ Keyboard Navigation</h4>
+                <p className="text-muted-foreground">Full keyboard support with Arrow keys, Enter, Escape, and more</p>
+              </div>
+              <div className="p-4 bg-card rounded-lg border">
+                <h4 className="font-semibold text-primary mb-2">♿ Accessibility</h4>
+                <p className="text-muted-foreground">Complete ARIA attributes, focus management, and screen reader support</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
         {/* ATOMS SECTION */}
         <section>
           <h2 className="text-3xl font-bold mb-8 text-foreground">Atoms</h2>
@@ -145,33 +240,147 @@ const App = () => {
           {/* Input */}
           <div className="mb-12">
             <h3 className="text-xl font-semibold mb-4 text-foreground">Input</h3>
-            <div className="space-y-4 max-w-md">
-              <Input placeholder="Normal input" />
-              <Input placeholder="Disabled input" disabled />
-              <Input placeholder="Error input" invalid />
+            <div className="space-y-6">
+              <div>
+                <p className="text-sm mb-3 text-muted-foreground">Basic States</p>
+                <div className="space-y-4 max-w-md">
+                  <Input placeholder="Normal input" />
+                  <Input placeholder="Disabled input" disabled />
+                  <Input placeholder="Error input" invalid />
+                </div>
+              </div>
+
+              <div>
+                <p className="text-sm mb-3 text-muted-foreground">Advanced Features</p>
+                <div className="space-y-4 max-w-md">
+                  <Input 
+                    placeholder="Email validation" 
+                    value={emailValue}
+                    onChange={setEmailValue}
+                    validation={[{ type: 'email', message: 'Please enter a valid email' }]}
+                    validateOnBlur
+                    onValidationChange={(valid, errors) => setIsEmailValid(valid)}
+                    leftIcon={<User className="w-4 h-4" />}
+                    clearable
+                  />
+                  
+                  <Input 
+                    placeholder="Phone validation" 
+                    value={phoneValue}
+                    onChange={setPhoneValue}
+                    validation={[{ type: 'phone', message: 'Please enter a valid phone number' }]}
+                    validateOnChange
+                    onValidationChange={(valid, errors) => setIsPhoneValid(valid)}
+                    debounceMs={300}
+                    clearable
+                  />
+                  
+                  <Input 
+                    placeholder="Loading state" 
+                    value={passwordValue}
+                    onChange={setPasswordValue}
+                    loading={loadingInput}
+                    leftIcon={<Settings className="w-4 h-4" />}
+                    rightIcon={<Star className="w-4 h-4" />}
+                  />
+                  
+                  <Button onClick={simulateLoading} size="sm" disabled={loadingInput}>
+                    {loadingInput ? 'Loading...' : 'Simulate Loading'}
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Textarea */}
           <div className="mb-12">
             <h3 className="text-xl font-semibold mb-4 text-foreground">Textarea</h3>
-            <div className="space-y-4 max-w-md">
-              <Textarea placeholder="Enter your message..." />
-              <Textarea placeholder="Disabled textarea" disabled />
+            <div className="space-y-6">
+              <div>
+                <p className="text-sm mb-3 text-muted-foreground">Basic States</p>
+                <div className="space-y-4 max-w-md">
+                  <Textarea placeholder="Enter your message..." value={textareaValue} onChange={setTextareaValue} />
+                  <Textarea placeholder="Disabled textarea" disabled />
+                </div>
+              </div>
+
+              <div>
+                <p className="text-sm mb-3 text-muted-foreground">Auto-Resize Features</p>
+                <div className="space-y-4 max-w-md">
+                  <Textarea 
+                    placeholder="Auto-resize (min 2, max 6 rows)" 
+                    value={autoResizeValue}
+                    onChange={setAutoResizeValue}
+                    autoResize
+                    minRows={2}
+                    maxRows={6}
+                  />
+                  
+                  <Textarea 
+                    placeholder="Auto-resize unlimited" 
+                    autoResize
+                    minRows={3}
+                  />
+                  
+                  <Textarea 
+                    placeholder="Non-resizable" 
+                    resizable={false}
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Select */}
           <div className="mb-12">
             <h3 className="text-xl font-semibold mb-4 text-foreground">Select</h3>
-            <div className="space-y-4 max-w-md">
-              <Select
-                options={[
-                  { label: 'Option 1', value: '1' },
-                  { label: 'Option 2', value: '2' },
-                  { label: 'Option 3', value: '3' },
-                ]}
-              />
+            <div className="space-y-6">
+              <div>
+                <p className="text-sm mb-3 text-muted-foreground">Basic Select</p>
+                <div className="space-y-4 max-w-md">
+                  <Select
+                    options={selectOptions}
+                    value={selectValue}
+                    onChange={setSelectValue}
+                    placeholder="Choose an option..."
+                  />
+                </div>
+              </div>
+
+              <div>
+                <p className="text-sm mb-3 text-muted-foreground">Advanced Features</p>
+                <div className="space-y-4 max-w-md">
+                  <div>
+                    <Select
+                      options={countryOptions}
+                      value={searchableSelectValue}
+                      onChange={setSearchableSelectValue}
+                      placeholder="Search countries..."
+                      searchable
+                      clearable
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">
+                      ⌨️ Try: Arrow keys, Enter, Escape, typing to search
+                    </p>
+                  </div>
+                  
+                  <Select
+                    options={selectOptions}
+                    placeholder="Loading state..."
+                    loading
+                    disabled
+                  />
+                  
+                  <Select
+                    options={selectOptions}
+                    value={multiSelectValue}
+                    onChange={setMultiSelectValue}
+                    placeholder="Select with custom height..."
+                    maxMenuHeight={150}
+                    clearable
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
@@ -180,7 +389,7 @@ const App = () => {
             <h3 className="text-xl font-semibold mb-4 text-foreground">Checkbox</h3>
             <div className="space-y-6">
               <div>
-                <p className="text-sm mb-2 text-muted-foreground">Vertical (default)</p>
+                <p className="text-sm mb-3 text-muted-foreground">Basic States</p>
                 <div className="space-y-3">
                   <Checkbox 
                     checked={checkbox1} 
@@ -200,6 +409,41 @@ const App = () => {
                   />
                 </div>
               </div>
+
+              <div>
+                <p className="text-sm mb-3 text-muted-foreground">Indeterminate State (Select All)</p>
+                <div className="space-y-3 p-4 border border-border rounded-lg">
+                  <Checkbox
+                    checked={isAllSelected}
+                    onChange={handleSelectAllChange}
+                    indeterminate={isSomeSelected}
+                    label="Select All"
+                  />
+                  <div className="ml-6 space-y-2">
+                    <Checkbox
+                      checked={checkboxGroup.option1}
+                      onChange={() => handleCheckboxGroupChange('option1')}
+                      label="Option 1"
+                    />
+                    <Checkbox
+                      checked={checkboxGroup.option2}
+                      onChange={() => handleCheckboxGroupChange('option2')}
+                      label="Option 2"
+                    />
+                    <Checkbox
+                      checked={checkboxGroup.option3}
+                      onChange={() => handleCheckboxGroupChange('option3')}
+                      label="Option 3"
+                    />
+                    <Checkbox
+                      checked={checkboxGroup.option4}
+                      onChange={() => handleCheckboxGroupChange('option4')}
+                      label="Option 4"
+                    />
+                  </div>
+                </div>
+              </div>
+
               <div>
                 <p className="text-sm mb-2 text-muted-foreground">Inline</p>
                 <div className="flex gap-4">

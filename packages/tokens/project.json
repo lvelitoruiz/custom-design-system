@@ -12,7 +12,19 @@
         "main": "packages/tokens/src/index.ts",
         "tsConfig": "packages/tokens/tsconfig.lib.json",
         "generateExportsField": true,
-        "format": ["esm", "cjs"]
+        "format": ["esm", "cjs"],
+        "assets": [
+          {
+            "glob": "packages/tokens/src/tailwind-preset.js",
+            "input": ".",
+            "output": "."
+          },
+          {
+            "glob": "packages/tokens/src/tokens.css",
+            "input": ".",
+            "output": "."
+          }
+        ]
       }
     },
     "lint": {

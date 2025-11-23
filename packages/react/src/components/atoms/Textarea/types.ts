@@ -4,4 +4,9 @@ export interface TextareaProps extends Omit<React.TextareaHTMLAttributes<HTMLTex
   invalid?: boolean;
   fullWidth?: boolean;
   error?: string;
+  // New Phase 2 props
+  autoResize?: boolean;
+  minRows?: number;
+  maxRows?: number;
+  resizable?: boolean;
 }

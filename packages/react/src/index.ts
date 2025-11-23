@@ -4,6 +4,13 @@ export * from './components';
 // Re-export utilities that might be useful for consumers
 export { cn } from './lib/utils';
 
+// Re-export hooks
+export { useInputValidation } from './hooks/useInputValidation';
+export { useDebounce } from './hooks/useDebounce';
+export { useAutoResize } from './hooks/useAutoResize';
+export { useSelectNavigation } from './hooks/useSelectNavigation';
+export { useClickOutside } from './hooks/useClickOutside';
+
 // Re-export common types and utilities
 export type { ButtonVariant, ButtonSize } from './components/atoms/Button/types';
 export type { InputProps } from './components/atoms/Input/types';

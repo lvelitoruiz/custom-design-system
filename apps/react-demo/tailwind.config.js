@@ -4,9 +4,9 @@ const path = require('path');
 module.exports = {
   content: [
     path.join(__dirname, './src/**/*.{js,ts,jsx,tsx}'),
-    path.join(__dirname, '../../node_modules/@luisvelito/react/**/*.js'),
+    path.join(__dirname, '../../packages/react/src/**/*.{js,ts,jsx,tsx}'),
   ],
-  presets: [require('@luisvelito/react/preset')],
+  presets: [require('../../packages/tokens/src/tailwind-preset.js')],
   darkMode: 'class',
   plugins: [],
 }

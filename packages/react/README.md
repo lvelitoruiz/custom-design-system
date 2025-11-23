@@ -5,11 +5,11 @@ Sistema de diseño de componentes React construido con TypeScript y Tailwind CSS
 ## 📦 Instalación
 
 ```bash
-npm install @luisvelito/react
+npm install @luisvelito/react @luisvelito/tokens
 # o
-yarn add @luisvelito/react
+yarn add @luisvelito/react @luisvelito/tokens
 # o
-pnpm add @luisvelito/react
+pnpm add @luisvelito/react @luisvelito/tokens
 ```
 
 ### Dependencias Peer
@@ -33,7 +33,7 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
     "./node_modules/@luisvelito/react/**/*.js", // ← Escanea los componentes
   ],
-  presets: [require("@luisvelito/react/preset")], // ← Usa el preset del design system
+  presets: [require("@luisvelito/tokens/tailwind-preset")], // ← Usa el preset compartido
   darkMode: 'class',
   plugins: [],
 }
@@ -45,7 +45,7 @@ En tu archivo CSS principal (ej: `src/index.css` o `src/styles.css`):
 
 ```css
 /* Importa los tokens del design system (valores por defecto) */
-@import "@luisvelito/react/tokens.css";
+@import "@luisvelito/tokens/tokens.css";
 
 @tailwind base;
 @tailwind components;
@@ -78,7 +78,7 @@ function App() {
 Puedes sobrescribir cualquier valor de diseño en tu CSS:
 
 ```css
-@import "@luisvelito/react/tokens.css";
+@import "@luisvelito/tokens/tokens.css";
 
 @tailwind base;
 @tailwind components;
