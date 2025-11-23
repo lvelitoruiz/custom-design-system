@@ -1,0 +1,32 @@
+{
+  "name": "tokens",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/tokens/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/tokens",
+        "main": "packages/tokens/src/index.ts",
+        "tsConfig": "packages/tokens/tsconfig.lib.json",
+        "generateExportsField": true,
+        "format": ["esm", "cjs"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/tokens/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "packages/tokens/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["scope:tokens", "type:util"]
+}

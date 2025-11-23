@@ -1,0 +1,41 @@
+{
+  "name": "react",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/react/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/react/dist",
+        "main": "packages/react/src/index.ts",
+        "tsConfig": "packages/react/tsconfig.lib.json",
+        "generateExportsField": true,
+        "format": ["esm", "cjs"],
+        "external": ["react", "react-dom", "react/jsx-runtime", "lucide-react"],
+        "assets": [
+          {
+            "glob": "packages/react/src/styles.css",
+            "input": ".",
+            "output": "."
+          }
+        ],
+        "rollupConfig": "packages/react/rollup.config.js"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/react/**/*.{ts,tsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "packages/react/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["scope:react", "type:ui"]
+}

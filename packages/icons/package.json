@@ -1,0 +1,27 @@
+{
+  "name": "@luisvelito/icons",
+  "version": "0.0.1",
+  "description": "Icon set for the design system",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "nx build",
+    "test": "nx test",
+    "lint": "nx lint"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

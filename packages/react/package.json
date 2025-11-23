@@ -1,0 +1,45 @@
+{
+  "name": "@luisvelito/react",
+  "version": "0.0.1",
+  "description": "React components for the design system",
+  "type": "module",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles": "./dist/styles.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "nx build",
+    "test": "nx test",
+    "lint": "nx lint"
+  },
+  "peerDependencies": {
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
+  },
+  "dependencies": {
+    "@luisvelito/tokens": "*",
+    "@luisvelito/utils": "*",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.460.0",
+    "tailwind-merge": "^2.5.4"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.49",
+    "autoprefixer": "^10.4.20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

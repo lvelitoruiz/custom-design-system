@@ -1,0 +1,32 @@
+{
+  "name": "utils",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/utils/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/utils",
+        "main": "packages/utils/src/index.ts",
+        "tsConfig": "packages/utils/tsconfig.lib.json",
+        "generateExportsField": true,
+        "format": ["esm", "cjs"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/utils/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "packages/utils/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["scope:utils", "type:util"]
+}

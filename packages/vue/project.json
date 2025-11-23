@@ -1,0 +1,33 @@
+{
+  "name": "vue",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/vue/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/vue",
+        "main": "packages/vue/src/index.ts",
+        "tsConfig": "packages/vue/tsconfig.lib.json",
+        "generateExportsField": true,
+        "format": ["esm", "cjs"],
+        "external": ["vue"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/vue/**/*.{ts,vue}"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "packages/vue/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["scope:vue", "type:ui"]
+}

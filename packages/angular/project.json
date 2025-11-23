@@ -1,0 +1,37 @@
+{
+  "name": "angular",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/angular/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:ng-packagr",
+      "outputs": ["{workspaceRoot}/dist/packages/angular"],
+      "options": {
+        "project": "packages/angular/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "packages/angular/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "packages/angular/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "lint": {
+      "executor": "@nx/eslint:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/angular/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "packages/angular/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["scope:angular", "type:ui"]
+}
