@@ -37,11 +37,20 @@ pids
 *.seed
 *.pid.lock
 
+# React
+.react/
+.reactcache/
+
 # Angular
 .angular/cache/
+.angular/
+
+# Vue
+.nuxt/
+.vuepress/dist/
 
 # NX
-.nx/cache
+.nx/
 
 # Coverage directory used by tools like istanbul
 coverage/
@@ -64,6 +73,27 @@ jspm_packages/
 .rts2_cache_cjs/
 .rts2_cache_es/
 .rts2_cache_umd/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Turbo cache
+.turbo/
+
+# Vite cache
+.vite/
+
+# Rollup cache
+.rollup.cache/
+
+# SWC cache
+.swc/
+
+# Webpack cache
+.cache-loader/
+
+# Jest cache
+.jest/
 
 # Optional REPL history
 .node_repl_history

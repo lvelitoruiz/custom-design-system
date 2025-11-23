@@ -8,7 +8,7 @@ export default defineConfig({
   cacheDir: '../../node_modules/.vite/apps/react-demo',
   plugins: [react(), nxViteTsPaths()],
   css: {
-    postcss: './postcss.config.cjs'
+    postcss: path.resolve(__dirname, 'postcss.config.cjs')
   },
   resolve: {
     alias: {

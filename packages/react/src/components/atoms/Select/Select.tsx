@@ -1,6 +1,7 @@
 import React from 'react';
 import { SelectProps } from './types';
 import { cn } from '../../../lib/utils';
+import { ChevronDown } from 'lucide-react';
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ({ 
@@ -18,34 +19,39 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     return (
-      <select
-        ref={ref}
-        className={cn(
-          'w-full px-3 py-2 text-[var(--font-size-base)] font-[var(--font-family-sans)] bg-background text-foreground border rounded-[var(--radius-lg)] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-0',
-          invalid
-            ? 'border-[var(--color-error-500)] focus:ring-[var(--color-error-500)] focus:border-[var(--color-error-500)]'
-            : 'border-input focus:ring-ring focus:border-ring',
-          disabled && 'bg-muted cursor-not-allowed opacity-60',
-          className
-        )}
-        disabled={disabled}
-        onChange={handleChange}
-        role="combobox"
-        aria-invalid={!!invalid}
-        aria-disabled={disabled}
-        {...props}
-      >
-        {placeholder && (
-          <option value="" disabled>
-            {placeholder}
-          </option>
-        )}
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
+      <div className="relative">
+        <select
+          ref={ref}
+          className={cn(
+            'flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background',
+            'placeholder:text-muted-foreground',
+            'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+            'disabled:cursor-not-allowed disabled:opacity-50',
+            '[&>span]:line-clamp-1',
+            'appearance-none pr-10', // Hide default dropdown arrow and add padding for custom icon
+            invalid && 'border-destructive focus:ring-destructive',
+            className
+          )}
+          disabled={disabled}
+          onChange={handleChange}
+          role="combobox"
+          aria-invalid={!!invalid}
+          aria-disabled={disabled}
+          {...props}
+        >
+          {placeholder && (
+            <option value="" disabled>
+              {placeholder}
+            </option>
+          )}
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 opacity-50 pointer-events-none" />
+      </div>
     );
   }
 );

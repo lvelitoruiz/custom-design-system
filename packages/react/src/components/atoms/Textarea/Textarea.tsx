@@ -14,7 +14,6 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     ...props 
   }, ref) => {
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      // Call onChange with the string value for new API compatibility
       onChange?.(e.target.value as any);
     };
 
@@ -23,17 +22,15 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         ref={ref}
         rows={rows}
         className={cn(
-          'w-full px-3 py-2 text-[var(--font-size-base)] font-[var(--font-family-sans)] bg-card text-foreground border rounded-[var(--radius-lg)] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-0 min-h-[80px]',
-          (error || invalid)
-            ? 'border-[var(--color-error-500)] focus:ring-[var(--color-error-500)] focus:border-[var(--color-error-500)]'
-            : 'border-input focus:ring-ring focus:border-ring',
-          disabled && 'bg-muted cursor-not-allowed opacity-60',
+          "flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background",
+          "placeholder:text-muted-foreground",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          "disabled:cursor-not-allowed disabled:opacity-50",
+          (error || invalid) && 'border-destructive focus-visible:ring-destructive',
           className
         )}
         disabled={disabled}
         onChange={handleChange}
-        role="textbox"
-        aria-multiline="true"
         aria-invalid={!!(error || invalid)}
         aria-disabled={disabled}
         {...props}

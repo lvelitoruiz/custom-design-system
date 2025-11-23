@@ -24,11 +24,13 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         ref={ref}
         className={cn(
-          'w-full px-3 py-2 text-[var(--font-size-base)] font-[var(--font-family-sans)] bg-card text-foreground border rounded-[var(--radius-lg)] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-0',
-          (error || invalid)
-            ? 'border-[var(--color-error-500)] focus:ring-[var(--color-error-500)] focus:border-[var(--color-error-500)]'
-            : 'border-input focus:ring-ring focus:border-ring',
-          disabled && 'bg-muted cursor-not-allowed opacity-60',
+          'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background',
+          'file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground',
+          'placeholder:text-muted-foreground',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+          'disabled:cursor-not-allowed disabled:opacity-50',
+          'md:text-sm',
+          (error || invalid) && 'border-destructive focus-visible:ring-destructive',
           leftIcon && 'pl-9',
           rightIcon && 'pr-9',
           className

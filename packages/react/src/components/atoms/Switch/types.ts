@@ -1,4 +1,4 @@
-export interface SwitchProps {
+export interface SwitchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   checked: boolean;
   onChange: (checked: boolean) => void;
   disabled?: boolean;

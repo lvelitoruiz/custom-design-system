@@ -3,60 +3,68 @@ import { SwitchProps } from './types';
 import { cn } from '../../../lib/utils';
 
 export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
-  ({ checked, onChange, disabled, label, name, id, inline = true }, ref) => {
+  ({ checked, onChange, disabled, label, name, id, inline = true, className, ...props }, ref) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       onChange(e.target.checked);
     };
 
-    return (
-      <label 
-        htmlFor={id}
-        className={cn(
-          inline ? "inline-flex" : "flex",
-          "items-center gap-2",
-          disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"
-        )}
-      >
-        <div className="relative">
-          <input
-            ref={ref}
-            type="checkbox"
-            id={id}
-            name={name}
-            checked={checked}
-            onChange={handleChange}
-            disabled={disabled}
-            className="sr-only peer"
-            role="switch"
-            aria-checked={checked}
-            aria-disabled={disabled}
-          />
-          <div 
-            className={cn(
-              'w-11 h-6 rounded-full transition-all duration-200',
-              'border-2',
-              checked 
-                ? 'bg-primary border-primary' 
-                : 'bg-input border-border',
-              !disabled && 'peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background',
-              !disabled && !checked && 'hover:border-border/80'
-            )}
-          />
-          <div 
-            className={cn(
-              'absolute top-1 left-1 w-4 h-4 rounded-full transition-transform duration-200',
-              'bg-background shadow-sm',
-              checked && 'translate-x-5'
-            )}
-          />
-        </div>
-        {label && (
-          <span className="text-[var(--font-size-base)] select-none">
+    const switchElement = (
+      <div className="relative">
+        <input
+          ref={ref}
+          type="checkbox"
+          id={id}
+          name={name}
+          checked={checked}
+          onChange={handleChange}
+          disabled={disabled}
+          className="sr-only peer"
+          role="switch"
+          aria-checked={checked}
+          aria-disabled={disabled}
+          {...props}
+        />
+        <div 
+          className={cn(
+            "peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+            "disabled:cursor-not-allowed disabled:opacity-50",
+            checked 
+              ? "bg-primary" 
+              : "bg-input",
+            className
+          )}
+        />
+        <div 
+          className={cn(
+            "pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform",
+            checked 
+              ? "translate-x-5" 
+              : "translate-x-0"
+          )}
+        />
+      </div>
+    );
+
+    if (label) {
+      return (
+        <label 
+          htmlFor={id}
+          className={cn(
+            inline ? "inline-flex" : "flex",
+            "items-center gap-2",
+            disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+          )}
+        >
+          {switchElement}
+          <span className="text-sm select-none">
             {label}
           </span>
-        )}
-      </label>
-    );
+        </label>
+      );
+    }
+
+    return switchElement;
   }
 );
 

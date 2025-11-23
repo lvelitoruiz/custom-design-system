@@ -148,7 +148,7 @@ const App = () => {
             <div className="space-y-4 max-w-md">
               <Input placeholder="Normal input" />
               <Input placeholder="Disabled input" disabled />
-              <Input placeholder="Error input" error="This field is required" />
+              <Input placeholder="Error input" invalid />
             </div>
           </div>
 

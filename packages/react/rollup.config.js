@@ -10,7 +10,7 @@ export default (config) => {
     postcss({
       extract: resolve('dist/packages/react/styles.css'),
       config: {
-        path: resolve(__dirname, 'postcss.config.js'),
+        path: resolve(__dirname, 'postcss.config.cjs'),
       },
       minimize: true,
       sourceMap: true,

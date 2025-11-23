@@ -17,76 +17,72 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     ...props 
   }, ref) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      onChange(e.target.checked);
+      onChange?.(e.target.checked);
     };
 
     const checkboxId = id || name;
 
-    return (
-      <label 
-        className={cn(
-          inline ? 'inline-flex' : 'flex',
-          'items-center gap-2',
-          disabled ? 'cursor-not-allowed' : 'cursor-pointer'
-        )}
-        htmlFor={checkboxId}
-      >
-        <div className="relative">
-          <input
-            ref={ref}
-            type="checkbox"
-            id={checkboxId}
-            name={name}
-            checked={checked}
-            onChange={handleChange}
-            disabled={disabled}
-            className="sr-only"
-            role="checkbox"
-            aria-checked={checked}
-            aria-disabled={disabled}
-            aria-invalid={invalid}
-            {...props}
-          />
-          <div
-            className={cn(
-              'w-5 h-5 rounded-[var(--radius-md)] border-2 transition-all duration-200 flex items-center justify-center',
-              checked
-                ? 'bg-primary border-primary'
-                : invalid
-                  ? 'bg-background border-[var(--color-error-500)]'
-                  : 'bg-background border-input',
-              !disabled && !checked && 'hover:border-ring',
-              disabled && 'opacity-60',
-              !disabled && 'focus-within:ring-2 focus-within:ring-offset-0',
-              checked && !invalid
-                ? 'focus-within:ring-ring'
-                : invalid
-                  ? 'focus-within:ring-[var(--color-error-500)]'
-                  : 'focus-within:ring-ring',
-              className
-            )}
-          >
-            {checked && (
-              <Check 
-                size={14} 
-                className="text-primary-foreground" 
-                strokeWidth={3}
-              />
-            )}
-          </div>
+    const checkboxElement = (
+      <div className="relative">
+        <input
+          ref={ref}
+          type="checkbox"
+          id={checkboxId}
+          name={name}
+          checked={checked}
+          onChange={handleChange}
+          disabled={disabled}
+          className="sr-only peer"
+          role="checkbox"
+          aria-checked={checked}
+          aria-disabled={disabled}
+          aria-invalid={invalid}
+          {...props}
+        />
+        <div
+          className={cn(
+            "peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+            "disabled:cursor-not-allowed disabled:opacity-50",
+            "flex items-center justify-center text-current",
+            checked
+              ? "bg-primary text-primary-foreground"
+              : "bg-background",
+            invalid && !checked && "border-destructive",
+            className
+          )}
+        >
+          {checked && (
+            <Check className="h-4 w-4" />
+          )}
         </div>
-        {label && (
+      </div>
+    );
+
+    if (label) {
+      return (
+        <label 
+          className={cn(
+            inline ? 'inline-flex' : 'flex',
+            'items-center gap-2',
+            disabled ? 'cursor-not-allowed' : 'cursor-pointer'
+          )}
+          htmlFor={checkboxId}
+        >
+          {checkboxElement}
           <span 
             className={cn(
-              'text-[var(--font-size-base)] font-[var(--font-family-sans)] text-foreground',
-              disabled && 'opacity-60'
+              'text-sm select-none',
+              disabled && 'opacity-50'
             )}
           >
             {label}
           </span>
-        )}
-      </label>
-    );
+        </label>
+      );
+    }
+
+    return checkboxElement;
   }
 );
 
