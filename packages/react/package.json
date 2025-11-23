@@ -2,7 +2,6 @@
   "name": "@luisvelito/react",
   "version": "0.0.1",
   "description": "React components for the design system",
-  "type": "module",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.esm.js",
   "types": "./dist/index.d.ts",
@@ -12,7 +11,8 @@
       "require": "./dist/index.cjs.js",
       "types": "./dist/index.d.ts"
     },
-    "./styles": "./dist/styles.css"
+    "./preset": "./dist/preset.js",
+    "./tokens.css": "./dist/tokens.css"
   },
   "files": [
     "dist"

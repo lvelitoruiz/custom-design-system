@@ -19,6 +19,16 @@
             "glob": "packages/react/src/styles.css",
             "input": ".",
             "output": "."
+          },
+          {
+            "glob": "packages/react/src/preset.js",
+            "input": ".",
+            "output": "."
+          },
+          {
+            "glob": "packages/react/src/tokens.css",
+            "input": ".",
+            "output": "."
           }
         ],
         "rollupConfig": "packages/react/rollup.config.js"

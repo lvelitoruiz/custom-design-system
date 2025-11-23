@@ -1,9 +1,9 @@
+/* Import design system tokens */
+@import "@luisvelito/react/tokens.css";
+
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-
-/* Import design system styles */
-@import "../../../packages/react/src/styles.css";
 
 /* Demo specific styles */
 .demo-container {
