@@ -25,10 +25,10 @@ import { CommonModule } from '@angular/common';
       [placeholder]="placeholder"
       [disabled]="disabled"
       [readonly]="readonly"
-      [rows]="currentRows"
+      [rows]="autoResize ? minRows : rows"
       [cols]="cols"
       [attr.maxlength]="maxlength"
-[class]="textareaClasses"
+      [class]="textareaClasses"
       [attr.aria-invalid]="invalid || !!error"
       [attr.aria-disabled]="disabled"
       [attr.aria-describedby]="error ? 'error-message' : null"
@@ -65,14 +65,12 @@ export class TextareaComponent implements ControlValueAccessor, AfterViewInit, O
   @Output() onFocusEvent = new EventEmitter<FocusEvent>();
 
   value = '';
-  currentRows = 4;
   private onChange = (value: string) => {};
   private onTouched = () => {};
   private resizeObserver?: ResizeObserver;
 
   ngAfterViewInit(): void {
     if (this.autoResize) {
-      this.currentRows = this.minRows;
       this.adjustHeight();
       
       // Set up resize observer to handle window resizes
@@ -119,25 +117,37 @@ export class TextareaComponent implements ControlValueAccessor, AfterViewInit, O
 
     const textarea = this.textareaRef.nativeElement;
     
-    // Reset height to measure scroll height
+    // Reset height to get the correct scrollHeight
     textarea.style.height = 'auto';
     
-    // Calculate the number of lines
-    const lineHeight = parseInt(getComputedStyle(textarea).lineHeight) || 20;
-    const scrollHeight = textarea.scrollHeight;
-    const calculatedRows = Math.ceil(scrollHeight / lineHeight);
+    // Calculate line height and spacing (matching React implementation)
+    const styles = window.getComputedStyle(textarea);
+    const lineHeight = parseInt(styles.lineHeight);
+    const paddingTop = parseInt(styles.paddingTop);
+    const paddingBottom = parseInt(styles.paddingBottom);
+    const borderTop = parseInt(styles.borderTopWidth);
+    const borderBottom = parseInt(styles.borderBottomWidth);
     
-    // Apply min/max constraints
-    let newRows = Math.max(this.minRows, calculatedRows);
-    if (this.maxRows) {
-      newRows = Math.min(this.maxRows, newRows);
+    // Calculate min and max heights
+    const minHeight = lineHeight * this.minRows + paddingTop + paddingBottom + borderTop + borderBottom;
+    const maxHeight = this.maxRows 
+      ? lineHeight * this.maxRows + paddingTop + paddingBottom + borderTop + borderBottom 
+      : Infinity;
+    
+    // Set new height
+    let newHeight = Math.max(minHeight, textarea.scrollHeight);
+    if (maxHeight !== Infinity) {
+      newHeight = Math.min(newHeight, maxHeight);
     }
     
-    this.currentRows = newRows;
+    textarea.style.height = `${newHeight}px`;
     
-    // Set the actual height
-    const height = newRows * lineHeight;
-    textarea.style.height = `${height}px`;
+    // Handle scrollable state when content exceeds maxRows
+    if (this.maxRows && textarea.scrollHeight > maxHeight) {
+      textarea.style.overflowY = 'auto';
+    } else {
+      textarea.style.overflowY = 'hidden';
+    }
   }
 
   onInput(event: Event): void {

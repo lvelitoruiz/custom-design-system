@@ -95,7 +95,11 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
     return (
       <div 
         ref={selectRef}
-        className={cn('relative', fullWidth ? 'w-full' : 'inline-block w-full')}
+        className={cn(
+          'relative', 
+          fullWidth ? 'w-full' : 'inline-block w-full',
+          isOpen && 'z-50'
+        )}
         {...props}
       >
         {/* Trigger */}
@@ -164,13 +168,13 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
         {isOpen && (
           <div 
             className={cn(
-              "absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg",
+              "absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg overflow-hidden flex flex-col",
               "animate-in fade-in-0 zoom-in-95 data-[side=bottom]:slide-in-from-top-2"
             )}
             style={{ maxHeight: maxMenuHeight }}
           >
             {searchable && (
-              <div className="p-2 border-b border-gray-200 dark:border-gray-700">
+              <div className="p-2 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 dark:text-gray-400" />
                   <input
@@ -193,7 +197,7 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
             <div
               ref={listRef}
               role="listbox"
-              className="max-h-48 overflow-auto p-1"
+              className="flex-1 overflow-y-auto p-1 min-h-0"
             >
               {filteredOptions.length === 0 ? (
                 <div className="px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center">

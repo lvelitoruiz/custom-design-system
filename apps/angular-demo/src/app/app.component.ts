@@ -1,25 +1,52 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ButtonComponent, InputComponent, TextareaComponent, SelectComponent, CheckboxComponent, SelectOption } from '@luisvelito/angular';
+import {
+  ButtonComponent,
+  InputComponent,
+  TextareaComponent,
+  SelectComponent,
+  CheckboxComponent,
+  RadioComponent,
+  SwitchComponent,
+  BadgeComponent,
+  SpinnerComponent,
+  CardComponent,
+  AlertComponent,
+  SelectOption
+} from '@luisvelito/angular';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { lucideUser, lucideSettings, lucideStar } from '@ng-icons/lucide';
+import { lucideUser, lucideSettings, lucideStar, lucideInfo, lucideCircleCheck, lucideTriangleAlert, lucideCircleX } from '@ng-icons/lucide';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule, 
-    FormsModule, 
-    ButtonComponent, 
-    InputComponent, 
-    TextareaComponent, 
-    SelectComponent, 
+    CommonModule,
+    FormsModule,
+    ButtonComponent,
+    InputComponent,
+    TextareaComponent,
+    SelectComponent,
     CheckboxComponent,
+    RadioComponent,
+    SwitchComponent,
+    BadgeComponent,
+    SpinnerComponent,
+    CardComponent,
+    AlertComponent,
     NgIconComponent
   ],
   providers: [
-    provideIcons({ lucideUser, lucideSettings, lucideStar })
+    provideIcons({
+      lucideUser,
+      lucideSettings,
+      lucideStar,
+      lucideInfo,
+      lucideCircleCheck,
+      lucideTriangleAlert,
+      lucideCircleX
+    })
   ],
   template: `
     <div class="min-h-screen bg-background">
@@ -207,62 +234,38 @@ import { lucideUser, lucideSettings, lucideStar } from '@ng-icons/lucide';
                     [options]="selectOptions"
                     [(ngModel)]="selectedValue"
                   ></ds-select>
-                  <p *ngIf="selectedValue" class="text-sm text-muted-foreground">
-                    Selected value: <span class="font-medium">{{ selectedValue }}</span>
-                  </p>
                 </div>
               </div>
 
               <div>
-                <p class="text-sm mb-3 text-muted-foreground">Select States</p>
+                <p class="text-sm mb-3 text-muted-foreground">Advanced Features</p>
                 <div class="space-y-4 max-w-md">
-                  <ds-select 
-                    placeholder="Normal select" 
-                    [options]="selectOptions"
-                    [(ngModel)]="normalSelectValue"
-                  ></ds-select>
+                  <div>
+                    <ds-select 
+                      placeholder="Search countries..." 
+                      [options]="countryOptions"
+                      [(ngModel)]="searchableSelectValue"
+                      [searchable]="true"
+                      [clearable]="true"
+                    ></ds-select>
+                    <p class="text-xs text-muted-foreground mt-1">
+                      ⌨️ Try: Arrow keys, Enter, Escape, typing to search
+                    </p>
+                  </div>
                   
                   <ds-select 
-                    placeholder="Disabled select" 
+                    placeholder="Loading state..." 
                     [options]="selectOptions"
+                    [loading]="true"
                     [disabled]="true"
                   ></ds-select>
                   
                   <ds-select 
-                    placeholder="Error select" 
+                    placeholder="Select with custom height..." 
                     [options]="selectOptions"
-                    [invalid]="true"
-                    [(ngModel)]="errorSelectValue"
-                  ></ds-select>
-                  
-                  <ds-select 
-                    placeholder="Full width select" 
-                    [options]="selectOptions"
-                    [fullWidth]="true"
-                    [(ngModel)]="fullWidthSelectValue"
-                  ></ds-select>
-                </div>
-              </div>
-
-              <div>
-                <p class="text-sm mb-3 text-muted-foreground">Different Option Sets</p>
-                <div class="space-y-4 max-w-md">
-                  <ds-select 
-                    placeholder="Countries" 
-                    [options]="countryOptions"
-                    [(ngModel)]="countryValue"
-                  ></ds-select>
-                  
-                  <ds-select 
-                    placeholder="Sizes" 
-                    [options]="sizeOptions"
-                    [(ngModel)]="sizeValue"
-                  ></ds-select>
-                  
-                  <ds-select 
-                    placeholder="Priority levels" 
-                    [options]="priorityOptions"
-                    [(ngModel)]="priorityValue"
+                    [(ngModel)]="multiSelectValue"
+                    [maxMenuHeight]="150"
+                    [clearable]="true"
                   ></ds-select>
                 </div>
               </div>
@@ -380,6 +383,269 @@ import { lucideUser, lucideSettings, lucideStar } from '@ng-icons/lucide';
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <!-- Radio -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Radio</h3>
+            <div class="space-y-6">
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Basic Radio Group</p>
+                <div class="space-y-3">
+                  <ds-radio 
+                    label="Option 1" 
+                    name="basic-radio"
+                    value="1"
+                    [checked]="selectedRadio === '1'"
+                    (checkedChange)="selectedRadio = '1'"
+                  ></ds-radio>
+                  <ds-radio 
+                    label="Option 2" 
+                    name="basic-radio"
+                    value="2"
+                    [checked]="selectedRadio === '2'"
+                    (checkedChange)="selectedRadio = '2'"
+                  ></ds-radio>
+                  <ds-radio 
+                    label="Option 3" 
+                    name="basic-radio"
+                    value="3"
+                    [checked]="selectedRadio === '3'"
+                    (checkedChange)="selectedRadio = '3'"
+                  ></ds-radio>
+                  <ds-radio 
+                    label="Disabled option" 
+                    name="basic-radio"
+                    value="4"
+                    [disabled]="true"
+                  ></ds-radio>
+                </div>
+                <p *ngIf="selectedRadio" class="text-sm text-muted-foreground mt-2">
+                  Selected: Option {{ selectedRadio }}
+                </p>
+              </div>
+
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Inline Layout</p>
+                <div class="flex gap-4 flex-wrap">
+                  <ds-radio 
+                    label="Option A" 
+                    name="inline-radio"
+                    value="a"
+                    [inline]="true"
+                    [checked]="inlineRadio === 'a'"
+                    (checkedChange)="inlineRadio = 'a'"
+                  ></ds-radio>
+                  <ds-radio 
+                    label="Option B" 
+                    name="inline-radio"
+                    value="b"
+                    [inline]="true"
+                    [checked]="inlineRadio === 'b'"
+                    (checkedChange)="inlineRadio = 'b'"
+                  ></ds-radio>
+                  <ds-radio 
+                    label="Option C" 
+                    name="inline-radio"
+                    value="c"
+                    [inline]="true"
+                    [checked]="inlineRadio === 'c'"
+                    (checkedChange)="inlineRadio = 'c'"
+                  ></ds-radio>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Switch -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Switch</h3>
+            <div class="space-y-6">
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Basic Switches</p>
+                <div class="space-y-3">
+                  <ds-switch 
+                    label="Enable notifications" 
+                    [(ngModel)]="switch1"
+                  ></ds-switch>
+                  <ds-switch 
+                    label="Dark mode" 
+                    [(ngModel)]="switch2"
+                  ></ds-switch>
+                  <ds-switch 
+                    label="Auto-save" 
+                    [(ngModel)]="switch3"
+                  ></ds-switch>
+                  <ds-switch 
+                    label="Disabled switch" 
+                    [disabled]="true"
+                  ></ds-switch>
+                </div>
+              </div>
+
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Without Labels</p>
+                <div class="flex gap-4">
+                  <ds-switch [(ngModel)]="switch1"></ds-switch>
+                  <ds-switch [(ngModel)]="switch2"></ds-switch>
+                  <ds-switch [disabled]="true"></ds-switch>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Badge -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Badge</h3>
+            <div class="space-y-6">
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Variants</p>
+                <div class="flex gap-2 flex-wrap">
+                  <ds-badge variant="primary">Primary</ds-badge>
+                  <ds-badge variant="secondary">Secondary</ds-badge>
+                  <ds-badge variant="success">Success</ds-badge>
+                  <ds-badge variant="warning">Warning</ds-badge>
+                  <ds-badge variant="danger">Danger</ds-badge>
+                </div>
+              </div>
+
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Sizes</p>
+                <div class="flex gap-2 flex-wrap items-center">
+                  <ds-badge size="sm">Small</ds-badge>
+                  <ds-badge size="md">Medium</ds-badge>
+                  <ds-badge size="lg">Large</ds-badge>
+                </div>
+              </div>
+
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Rounded</p>
+                <div class="flex gap-2 flex-wrap">
+                  <ds-badge [rounded]="true">New</ds-badge>
+                  <ds-badge variant="success" [rounded]="true">Active</ds-badge>
+                  <ds-badge variant="danger" [rounded]="true">99+</ds-badge>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Spinner -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Spinner</h3>
+            <div class="space-y-6">
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Sizes</p>
+                <div class="flex gap-4 items-center">
+                  <ds-spinner size="sm"></ds-spinner>
+                  <ds-spinner size="md"></ds-spinner>
+                  <ds-spinner size="lg"></ds-spinner>
+                </div>
+              </div>
+
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Loading Button</p>
+                <button class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md">
+                  <ds-spinner size="sm"></ds-spinner>
+                  Loading...
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Card</h3>
+            <div class="space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <ds-card title="Simple Card" description="This is a basic card component">
+                  <p class="text-sm text-muted-foreground">Card content goes here. You can add any content you want.</p>
+                </ds-card>
+
+                <ds-card title="With Shadow" description="Card with medium shadow" shadow="md">
+                  <p class="text-sm text-muted-foreground">This card has more prominent shadow.</p>
+                </ds-card>
+
+                <ds-card title="Bordered Card" [bordered]="true">
+                  <p class="text-sm text-muted-foreground">This card has a border instead of shadow.</p>
+                </ds-card>
+
+                <ds-card 
+                  title="Large Padding" 
+                  description="More spacious layout"
+                  padding="lg"
+                  [bordered]="true"
+                >
+                  <p class="text-sm text-muted-foreground">This card has larger padding.</p>
+                </ds-card>
+              </div>
+
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Card with Header and Footer</p>
+                <ds-card [hasHeader]="true" [hasFooter]="true" [bordered]="true">
+                  <div slot="header" class="p-4 bg-muted">
+                    <h4 class="font-semibold">Card Header</h4>
+                  </div>
+                  <p class="text-sm text-muted-foreground">Main card content with header and footer sections.</p>
+                  <div slot="footer" class="flex justify-end gap-2">
+                    <button class="px-3 py-1.5 text-sm border border-border rounded-md hover:bg-muted">Cancel</button>
+                    <button class="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-md">Save</button>
+                  </div>
+                </ds-card>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alert -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Alert</h3>
+            <div class="space-y-4">
+              <ds-alert 
+                variant="info" 
+                title="Information" 
+                description="This is an informational alert message."
+                [hasIcon]="true"
+              >
+                <ng-icon slot="icon" name="lucideInfo" size="20"></ng-icon>
+              </ds-alert>
+
+              <ds-alert 
+                variant="success" 
+                title="Success!" 
+                description="Your changes have been saved successfully."
+                [hasIcon]="true"
+              >
+                <ng-icon slot="icon" name="lucideCircleCheck" size="20"></ng-icon>
+              </ds-alert>
+
+              <ds-alert 
+                variant="warning" 
+                title="Warning" 
+                description="Please review your information before proceeding."
+                [hasIcon]="true"
+              >
+                <ng-icon slot="icon" name="lucideTriangleAlert" size="20"></ng-icon>
+              </ds-alert>
+
+              <ds-alert 
+                variant="danger" 
+                title="Error" 
+                description="There was an error processing your request."
+                [hasIcon]="true"
+                [closable]="true"
+                (close)="showAlert = false"
+                *ngIf="showAlert"
+              >
+                <ng-icon slot="icon" name="lucideCircleX" size="20"></ng-icon>
+              </ds-alert>
+
+              <button 
+                *ngIf="!showAlert"
+                (click)="showAlert = true"
+                class="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-md"
+              >
+                Show Error Alert
+              </button>
             </div>
           </div>
 
@@ -735,12 +1001,8 @@ export class AppComponent {
   
   // Select values
   selectedValue = '';
-  normalSelectValue = '';
-  errorSelectValue = '';
-  fullWidthSelectValue = '';
-  countryValue = '';
-  sizeValue = '';
-  priorityValue = '';
+  searchableSelectValue = '';
+  multiSelectValue = '';
   
   // Checkbox values
   checkbox1 = false;
@@ -752,6 +1014,18 @@ export class AppComponent {
   validationCheckbox1 = false;
   validationCheckbox2 = false;
   validationCheckbox3 = false;
+  
+  // Radio values
+  selectedRadio = '1';
+  inlineRadio = 'a';
+  
+  // Switch values
+  switch1 = false;
+  switch2 = true;
+  switch3 = false;
+  
+  // Alert
+  showAlert = true;
   
   // Checkbox group for indeterminate example
   checkboxGroup = {
