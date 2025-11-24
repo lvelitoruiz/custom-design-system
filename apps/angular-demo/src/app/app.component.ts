@@ -847,41 +847,87 @@ import {
           <div class="mb-12">
             <h3 class="text-xl font-semibold mb-4 text-foreground">Card</h3>
             <div class="space-y-6">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <ds-card title="Simple Card" description="This is a basic card component">
-                  <p class="text-sm text-muted-foreground">Card content goes here. You can add any content you want.</p>
-                </ds-card>
-
-                <ds-card title="With Shadow" description="Card with medium shadow" shadow="md">
-                  <p class="text-sm text-muted-foreground">This card has more prominent shadow.</p>
-                </ds-card>
-
-                <ds-card title="Bordered Card" [bordered]="true">
-                  <p class="text-sm text-muted-foreground">This card has a border instead of shadow.</p>
-                </ds-card>
-
-                <ds-card 
-                  title="Large Padding" 
-                  description="More spacious layout"
-                  padding="lg"
-                  [bordered]="true"
-                >
-                  <p class="text-sm text-muted-foreground">This card has larger padding.</p>
-                </ds-card>
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Básico con título y descripción</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <ds-card 
+                    title="Card Title" 
+                    description="This is a description that provides context about the card content."
+                  >
+                    <p class="text-sm text-foreground">
+                      Main card content goes here. You can add any React elements.
+                    </p>
+                  </ds-card>
+                  
+                  <ds-card title="Simple Card">
+                    <p class="text-sm text-foreground">
+                      Card with only a title and content.
+                    </p>
+                  </ds-card>
+                </div>
               </div>
 
               <div>
-                <p class="text-sm mb-3 text-muted-foreground">Card with Header and Footer</p>
-                <ds-card [hasHeader]="true" [hasFooter]="true" [bordered]="true">
-                  <div slot="header" class="p-4 bg-muted">
-                    <h4 class="font-semibold">Card Header</h4>
-                  </div>
-                  <p class="text-sm text-muted-foreground">Main card content with header and footer sections.</p>
-                  <div slot="footer" class="flex justify-end gap-2">
-                    <button class="px-3 py-1.5 text-sm border border-border rounded-md hover:bg-muted">Cancel</button>
-                    <button class="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-md">Save</button>
-                  </div>
-                </ds-card>
+                <p class="text-sm mb-3 text-muted-foreground">Con header y footer</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <ds-card [hasHeader]="true" [hasFooter]="true">
+                    <div slot="header" class="p-4 bg-primary/10">
+                      <p class="text-sm font-semibold text-primary">Header Section</p>
+                    </div>
+                    <p class="text-sm text-foreground">
+                      Card with custom header and footer sections.
+                    </p>
+                    <div slot="footer" class="flex justify-end gap-2">
+                      <ui-button variant="ghost" size="sm">Cancel</ui-button>
+                      <ui-button variant="primary" size="sm">Save</ui-button>
+                    </div>
+                  </ds-card>
+                  
+                  <ds-card [hasFooter]="true">
+                    <p class="text-sm font-medium text-foreground mb-2">Status Update</p>
+                    <p class="text-sm text-muted-foreground">
+                      All systems operational.
+                    </p>
+                    <div slot="footer" class="flex items-center justify-between">
+                      <span class="text-xs text-muted-foreground">Updated 2 hours ago</span>
+                      <ui-button variant="ghost" size="sm">View Details</ui-button>
+                    </div>
+                  </ds-card>
+                </div>
+              </div>
+
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Padding variants</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <ds-card title="Small Padding" padding="sm">
+                    <p class="text-sm text-foreground">Compact card with small padding.</p>
+                  </ds-card>
+                  
+                  <ds-card title="Medium Padding" padding="md">
+                    <p class="text-sm text-foreground">Default padding (medium).</p>
+                  </ds-card>
+                  
+                  <ds-card title="Large Padding" padding="lg">
+                    <p class="text-sm text-foreground">Spacious card with large padding.</p>
+                  </ds-card>
+                </div>
+              </div>
+
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Shadow variants</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <ds-card title="No Shadow" shadow="none" [bordered]="true">
+                    <p class="text-sm text-foreground">Card without shadow but with border.</p>
+                  </ds-card>
+                  
+                  <ds-card title="Small Shadow" shadow="sm">
+                    <p class="text-sm text-foreground">Card with subtle shadow (default).</p>
+                  </ds-card>
+                  
+                  <ds-card title="Medium Shadow" shadow="md">
+                    <p class="text-sm text-foreground">Card with medium shadow.</p>
+                  </ds-card>
+                </div>
               </div>
             </div>
           </div>
