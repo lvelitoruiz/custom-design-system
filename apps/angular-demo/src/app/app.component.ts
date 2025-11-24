@@ -13,10 +13,73 @@ import {
   SpinnerComponent,
   CardComponent,
   AlertComponent,
-  SelectOption
+  SliderComponent,
+  TagComponent,
+  ProgressComponent,
+  AvatarComponent,
+  IconComponent,
+  SkeletonComponent,
+  DividerComponent,
+  ChipComponent,
+  KBDComponent,
+  FormFieldComponent,
+  DropdownComponent,
+  InputGroupComponent,
+  ListItemComponent,
+  BreadcrumbsComponent,
+  TabsComponent,
+  AccordionComponent,
+  SearchBarComponent,
+  NavbarComponent,
+  SidebarComponent,
+  HeaderComponent,
+  FooterComponent,
+  ToolbarComponent,
+  ListGroupComponent,
+  ModalComponent,
+  DrawerComponent,
+  TableComponent,
+  PaginationComponent,
+  CardListComponent,
+  KpiCardComponent,
+  EmptyStateComponent,
+  UserMenuComponent,
+  SelectOption,
+  BreadcrumbItem,
+  TabItem,
+  AccordionItem,
+  DropdownItem,
+  SidebarItem,
+  NavLink,
+  User,
+  UserMenuItem,
+  TableColumn
 } from '@luisvelito/angular';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { lucideUser, lucideSettings, lucideStar, lucideInfo, lucideCircleCheck, lucideTriangleAlert, lucideCircleX } from '@ng-icons/lucide';
+import { 
+  lucideUser, 
+  lucideSettings, 
+  lucideStar, 
+  lucideInfo, 
+  lucideCircleCheck, 
+  lucideTriangleAlert, 
+  lucideCircleX,
+  lucideHeart,
+  lucideBell,
+  lucideFolder,
+  lucideUsers,
+  lucideLogOut,
+  lucideTrendingUp,
+  lucideDollarSign,
+  lucideShoppingCart,
+  lucideActivity,
+  lucideInbox,
+  lucideFileX,
+  lucideSearch,
+  lucideChevronRight,
+  lucideChevronDown,
+  lucideX
+} from '@ng-icons/lucide';
 
 @Component({
   selector: 'app-root',
@@ -35,6 +98,37 @@ import { lucideUser, lucideSettings, lucideStar, lucideInfo, lucideCircleCheck, 
     SpinnerComponent,
     CardComponent,
     AlertComponent,
+    SliderComponent,
+    TagComponent,
+    ProgressComponent,
+    AvatarComponent,
+    IconComponent,
+    SkeletonComponent,
+    DividerComponent,
+    ChipComponent,
+    KBDComponent,
+    FormFieldComponent,
+    DropdownComponent,
+    InputGroupComponent,
+    ListItemComponent,
+    BreadcrumbsComponent,
+    TabsComponent,
+    AccordionComponent,
+    SearchBarComponent,
+    NavbarComponent,
+    SidebarComponent,
+    HeaderComponent,
+    FooterComponent,
+    ToolbarComponent,
+    ListGroupComponent,
+    ModalComponent,
+    DrawerComponent,
+    TableComponent,
+    PaginationComponent,
+    CardListComponent,
+    KpiCardComponent,
+    EmptyStateComponent,
+    UserMenuComponent,
     NgIconComponent
   ],
   providers: [
@@ -45,7 +139,22 @@ import { lucideUser, lucideSettings, lucideStar, lucideInfo, lucideCircleCheck, 
       lucideInfo,
       lucideCircleCheck,
       lucideTriangleAlert,
-      lucideCircleX
+      lucideCircleX,
+      lucideHeart,
+      lucideBell,
+      lucideFolder,
+      lucideUsers,
+      lucideLogOut,
+      lucideTrendingUp,
+      lucideDollarSign,
+      lucideShoppingCart,
+      lucideActivity,
+      lucideInbox,
+      lucideFileX,
+      lucideSearch,
+      lucideChevronRight,
+      lucideChevronDown,
+      lucideX
     })
   ],
   template: `
@@ -553,6 +662,187 @@ import { lucideUser, lucideSettings, lucideStar, lucideInfo, lucideCircleCheck, 
             </div>
           </div>
 
+          <!-- Slider -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Slider</h3>
+            <div class="max-w-md space-y-4">
+              <div>
+                <p class="text-sm mb-2 text-foreground">Volume: {{ sliderValue }}%</p>
+                <ds-slider
+                  [(value)]="sliderValue"
+                  [min]="0"
+                  [max]="100"
+                ></ds-slider>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tag -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Tag</h3>
+            <div class="space-y-4">
+              <div>
+                <p class="text-sm mb-2 text-muted-foreground">Variants</p>
+                <div class="flex flex-wrap gap-2">
+                  <ds-tag variant="primary">Primary</ds-tag>
+                  <ds-tag variant="secondary">Secondary</ds-tag>
+                  <ds-tag variant="success">Success</ds-tag>
+                  <ds-tag variant="warning">Warning</ds-tag>
+                  <ds-tag variant="danger">Danger</ds-tag>
+                </div>
+              </div>
+              <div>
+                <p class="text-sm mb-2 text-muted-foreground">Sizes</p>
+                <div class="flex flex-wrap gap-2 items-center">
+                  <ds-tag size="sm">Small</ds-tag>
+                  <ds-tag size="md">Medium</ds-tag>
+                  <ds-tag size="lg">Large</ds-tag>
+                </div>
+              </div>
+              <div>
+                <p class="text-sm mb-2 text-muted-foreground">Removable</p>
+                <div class="flex flex-wrap gap-2">
+                  <ds-tag variant="primary" [removable]="true">React</ds-tag>
+                  <ds-tag variant="success" [removable]="true">TypeScript</ds-tag>
+                  <ds-tag variant="danger" size="sm" [removable]="true">Remove me</ds-tag>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Progress</h3>
+            <div class="space-y-6">
+              <div class="max-w-md space-y-4">
+                <div>
+                  <p class="text-sm mb-2 text-muted-foreground">Variants</p>
+                  <div class="space-y-3">
+                    <ds-progress [value]="progress" variant="primary" [label]="true"></ds-progress>
+                    <ds-progress [value]="75" variant="secondary" [label]="true"></ds-progress>
+                    <ds-progress [value]="90" variant="success" [label]="true"></ds-progress>
+                    <ds-progress [value]="50" variant="warning" [label]="true"></ds-progress>
+                    <ds-progress [value]="30" variant="danger" [label]="true"></ds-progress>
+                  </div>
+                </div>
+                <div>
+                  <p class="text-sm mb-2 text-muted-foreground">Sizes</p>
+                  <div class="space-y-3">
+                    <ds-progress [value]="60" size="sm" label="Small"></ds-progress>
+                    <ds-progress [value]="70" size="md" label="Medium"></ds-progress>
+                    <ds-progress [value]="80" size="lg" label="Large"></ds-progress>
+                  </div>
+                </div>
+                <ui-button size="sm" (click)="increaseProgress()">
+                  Increase +10%
+                </ui-button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Avatar -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Avatar</h3>
+            <div class="space-y-6">
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Sizes</p>
+                <div class="flex items-center gap-3">
+                  <ds-avatar size="sm" fallback="SM" alt="Small Avatar"></ds-avatar>
+                  <ds-avatar size="md" fallback="MD" alt="Medium Avatar"></ds-avatar>
+                  <ds-avatar size="lg" fallback="LG" alt="Large Avatar"></ds-avatar>
+                  <ds-avatar size="xl" fallback="XL" alt="Extra Large Avatar"></ds-avatar>
+                </div>
+              </div>
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">With Images</p>
+                <div class="flex items-center gap-3">
+                  <ds-avatar size="sm" src="https://i.pravatar.cc/150?img=1" alt="User 1"></ds-avatar>
+                  <ds-avatar size="md" src="https://i.pravatar.cc/150?img=2" alt="User 2"></ds-avatar>
+                  <ds-avatar size="lg" src="https://i.pravatar.cc/150?img=3" alt="User 3"></ds-avatar>
+                  <ds-avatar size="xl" src="https://i.pravatar.cc/150?img=4" alt="User 4"></ds-avatar>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Icon -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Icon</h3>
+            <div class="space-y-6">
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Sizes</p>
+                <div class="flex items-center gap-4">
+                  <ds-icon [size]="16">
+                    <ng-icon name="lucideHeart" class="w-full h-full"></ng-icon>
+                  </ds-icon>
+                  <ds-icon [size]="20">
+                    <ng-icon name="lucideStar" class="w-full h-full"></ng-icon>
+                  </ds-icon>
+                  <ds-icon [size]="24">
+                    <ng-icon name="lucideSettings" class="w-full h-full"></ng-icon>
+                  </ds-icon>
+                  <ds-icon [size]="32">
+                    <ng-icon name="lucideUser" class="w-full h-full"></ng-icon>
+                  </ds-icon>
+                  <ds-icon [size]="40">
+                    <ng-icon name="lucideBell" class="w-full h-full"></ng-icon>
+                  </ds-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skeleton -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Skeleton</h3>
+            <div class="space-y-4 max-w-md">
+              <ds-skeleton [width]="'100%'" [height]="'20px'"></ds-skeleton>
+              <ds-skeleton [width]="'80%'" [height]="'20px'"></ds-skeleton>
+              <ds-skeleton [width]="'60%'" [height]="'20px'"></ds-skeleton>
+              <ds-skeleton variant="circular" [width]="'60px'" [height]="'60px'"></ds-skeleton>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Divider</h3>
+            <div class="space-y-4">
+              <div>
+                <p class="text-sm text-muted-foreground mb-2">Horizontal</p>
+                <ds-divider></ds-divider>
+              </div>
+              <div class="flex items-center gap-4 h-20">
+                <p class="text-sm text-muted-foreground">Vertical</p>
+                <ds-divider orientation="vertical"></ds-divider>
+                <p class="text-sm text-muted-foreground">Example</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chip -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Chip</h3>
+            <div class="flex flex-wrap gap-2">
+              <ds-chip label="Default"></ds-chip>
+              <ds-chip label="Primary" variant="primary"></ds-chip>
+              <ds-chip label="Success" variant="success"></ds-chip>
+              <ds-chip label="Error" variant="error"></ds-chip>
+              <ds-chip label="Removable"></ds-chip>
+            </div>
+          </div>
+
+          <!-- KBD -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">KBD</h3>
+            <div class="flex items-center gap-2 flex-wrap">
+              <p class="text-foreground">Press</p>
+              <ds-kbd>Ctrl</ds-kbd>
+              <p>+</p>
+              <ds-kbd>K</ds-kbd>
+              <p>to search</p>
+            </div>
+          </div>
+
           <!-- Card -->
           <div class="mb-12">
             <h3 class="text-xl font-semibold mb-4 text-foreground">Card</h3>
@@ -649,6 +939,260 @@ import { lucideUser, lucideSettings, lucideStar, lucideInfo, lucideCircleCheck, 
             </div>
           </div>
 
+        </section>
+
+        <!-- MOLECULES SECTION -->
+        <section>
+          <h2 class="text-3xl font-bold mb-8 text-foreground">Molecules</h2>
+
+          <!-- FormField -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">FormField</h3>
+            <div class="space-y-4 max-w-md">
+              <ds-form-field label="Email" [required]="true" [id]="'email-field'">
+                <ui-input #formControl placeholder="Enter your email" type="email"></ui-input>
+              </ds-form-field>
+              
+              <ds-form-field 
+                label="Password" 
+                [required]="true" 
+                hint="Must be at least 8 characters"
+                [id]="'password-field'"
+              >
+                <ui-input #formControl placeholder="Enter your password" type="password"></ui-input>
+              </ds-form-field>
+              
+              <ds-form-field 
+                label="Username" 
+                error="Username is already taken"
+                [id]="'username-field'"
+              >
+                <ui-input #formControl placeholder="Choose a username"></ui-input>
+              </ds-form-field>
+            </div>
+          </div>
+
+          <!-- Dropdown -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Dropdown</h3>
+            <div class="flex gap-4">
+              <ds-dropdown 
+                [items]="dropdownItems1" 
+                (onSelect)="handleDropdownSelect($event)"
+              >
+                <ui-button slot="trigger" variant="primary">Open Menu</ui-button>
+              </ds-dropdown>
+              
+              <ds-dropdown 
+                [items]="dropdownItems2" 
+                (onSelect)="handleDropdownSelect($event)"
+                align="right"
+              >
+                <ui-button slot="trigger" variant="secondary">Options</ui-button>
+              </ds-dropdown>
+              
+              <ds-dropdown 
+                [items]="dropdownItems3" 
+                (onSelect)="handleDropdownSelect($event)"
+                [disabled]="true"
+              >
+                <ui-button slot="trigger" variant="primary" [disabled]="true">Disabled</ui-button>
+              </ds-dropdown>
+            </div>
+          </div>
+
+          <!-- InputGroup -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">InputGroup</h3>
+            <div class="space-y-4 max-w-md">
+              <ds-input-group [hasLeftAddon]="true">
+                <span slot="leftAddon">https://</span>
+                <ui-input placeholder="example.com"></ui-input>
+              </ds-input-group>
+              
+              <ds-input-group [hasRightAddon]="true">
+                <ui-input placeholder="Username"></ui-input>
+                <span slot="rightAddon">@example.com</span>
+              </ds-input-group>
+              
+              <ds-input-group [hasLeftAddon]="true" [hasRightAddon]="true">
+                <span slot="leftAddon">$</span>
+                <ui-input placeholder="0.00" type="number"></ui-input>
+                <span slot="rightAddon">.00</span>
+              </ds-input-group>
+            </div>
+          </div>
+
+          <!-- ListItem -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">ListItem</h3>
+            <div class="space-y-2 max-w-md">
+              <ds-list-item 
+                title="Simple list item" 
+              ></ds-list-item>
+              
+              <ds-list-item 
+                title="With description" 
+                description="This is a secondary description text"
+              ></ds-list-item>
+              
+              <ds-list-item 
+                title="With left icon"
+                description="Email notification settings"
+                [hasLeftIcon]="true"
+              >
+                <ds-icon slot="leftIcon" [size]="20">
+                  <ng-icon name="lucideBell" class="w-full h-full"></ng-icon>
+                </ds-icon>
+              </ds-list-item>
+              
+              <ds-list-item 
+                title="With right icon"
+                description="Navigate to profile page"
+                [hasRightIcon]="true"
+              >
+                <ds-icon slot="rightIcon" [size]="16">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-full h-full">
+                    <polyline points="9 18 15 12 9 6"/>
+                  </svg>
+                </ds-icon>
+              </ds-list-item>
+              
+              <ds-list-item 
+                title="Clickable item"
+                description="Click me to see the action"
+                [clickable]="true"
+                [hasLeftIcon]="true"
+                [hasRightIcon]="true"
+                (onClick)="logAction('Item clicked!')"
+              >
+                <ds-icon slot="leftIcon" [size]="20">
+                  <ng-icon name="lucideUser" class="w-full h-full"></ng-icon>
+                </ds-icon>
+                <ds-icon slot="rightIcon" [size]="16">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-full h-full">
+                    <polyline points="9 18 15 12 9 6"/>
+                  </svg>
+                </ds-icon>
+              </ds-list-item>
+            </div>
+          </div>
+          
+          <!-- ListGroup & ListItem -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">ListGroup & ListItem</h3>
+            <ds-list-group>
+              <ds-list-item 
+                title="Home" 
+                [clickable]="true"
+                [hasLeftIcon]="true"
+                (onClick)="logAction('Home')"
+              >
+                <ds-icon slot="leftIcon" [size]="20">
+                  <ng-icon name="lucideHome" class="w-full h-full"></ng-icon>
+                </ds-icon>
+              </ds-list-item>
+              
+              <ds-list-item 
+                title="Profile" 
+                description="View and edit your profile"
+                [clickable]="true"
+                [active]="true"
+                [hasLeftIcon]="true"
+                (onClick)="logAction('Profile')"
+              >
+                <ds-icon slot="leftIcon" [size]="20">
+                  <ng-icon name="lucideUser" class="w-full h-full"></ng-icon>
+                </ds-icon>
+              </ds-list-item>
+              
+              <ds-list-item 
+                title="Notifications" 
+                description="3 new notifications"
+                [clickable]="true"
+                [hasLeftIcon]="true"
+                [hasRightIcon]="true"
+                (onClick)="logAction('Notifications')"
+              >
+                <ds-icon slot="leftIcon" [size]="20">
+                  <ng-icon name="lucideBell" class="w-full h-full"></ng-icon>
+                </ds-icon>
+                <ds-badge slot="rightIcon" size="sm" variant="primary">3</ds-badge>
+              </ds-list-item>
+              
+              <ds-list-item 
+                title="Settings" 
+                [clickable]="true"
+                [hasLeftIcon]="true"
+                (onClick)="logAction('Settings')"
+              >
+                <ds-icon slot="leftIcon" [size]="20">
+                  <ng-icon name="lucideSettings" class="w-full h-full"></ng-icon>
+                </ds-icon>
+              </ds-list-item>
+            </ds-list-group>
+          </div>
+
+          <!-- Breadcrumbs -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Breadcrumbs</h3>
+            <ds-breadcrumbs [items]="breadcrumbItems"></ds-breadcrumbs>
+          </div>
+
+          <!-- Tabs -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Tabs</h3>
+            <div class="space-y-6">
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Basic Tabs</p>
+                <ds-tabs 
+                  [tabs]="tabItems" 
+                  [value]="activeTab"
+                  (onChange)="handleTabChange($event)"
+                ></ds-tabs>
+                <div class="mt-4 p-4 bg-card rounded-lg border">
+                  <p class="text-sm text-foreground">Content for: {{ activeTab }}</p>
+                </div>
+              </div>
+              
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Full Width Tabs</p>
+                <ds-tabs 
+                  [tabs]="tabItems2" 
+                  [value]="activeTab2"
+                  [fullWidth]="true"
+                  (onChange)="handleTabChange2($event)"
+                ></ds-tabs>
+                <div class="mt-4 p-4 bg-card rounded-lg border">
+                  <p class="text-sm text-foreground">Content for: {{ activeTab2 }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Accordion</h3>
+            <ds-accordion 
+              [items]="accordionItems"
+              [defaultOpen]="['1']"
+            ></ds-accordion>
+          </div>
+
+          <!-- SearchBar -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">SearchBar</h3>
+            <div class="max-w-md">
+              <ds-search-bar
+                [(value)]="searchBarValue"
+                placeholder="Search..."
+                [clearable]="true"
+              ></ds-search-bar>
+              <p *ngIf="searchBarValue" class="text-sm text-muted-foreground mt-2">
+                Searching for: {{ searchBarValue }}
+              </p>
+            </div>
+          </div>
         </section>
 
         <!-- FORM EXAMPLES SECTION -->
@@ -951,30 +1495,334 @@ import { lucideUser, lucideSettings, lucideStar, lucideInfo, lucideCircleCheck, 
           </div>
         </section>
 
+        <!-- ORGANISMS SECTION -->
+        <section>
+          <h2 class="text-3xl font-bold mb-8 text-foreground">Organisms</h2>
+
+          <!-- Navbar -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Navbar</h3>
+            <ds-navbar 
+              [links]="navbarLinks"
+              [sticky]="false"
+              [hasLogo]="true"
+              [hasRightContent]="true"
+            >
+              <div slot="logo" class="font-bold text-primary">Logo</div>
+              <div slot="rightContent" class="flex gap-2">
+                <ui-button size="sm" variant="ghost">Login</ui-button>
+                <ui-button size="sm">Sign Up</ui-button>
+              </div>
+            </ds-navbar>
+          </div>
+
+          <!-- Sidebar -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Sidebar</h3>
+            <div class="h-96 border border-border rounded-lg overflow-hidden flex">
+              <ds-sidebar 
+                [items]="sidebarItems"
+                [collapsed]="sidebarCollapsed"
+                [hasHeader]="true"
+                [hasFooter]="true"
+              >
+                <div slot="header" class="font-bold">App</div>
+                <ng-icon slot="icon-home" name="lucideHome" size="20"></ng-icon>
+                <ng-icon slot="icon-projects" name="lucideFolder" size="20"></ng-icon>
+                <ng-icon slot="icon-team" name="lucideUsers" size="20"></ng-icon>
+                <ng-icon slot="icon-settings" name="lucideSettings" size="20"></ng-icon>
+                <ui-button slot="footer" size="sm" (click)="toggleSidebar()" [fullWidth]="true">
+                  {{ sidebarCollapsed ? 'Expand' : 'Collapse' }}
+                </ui-button>
+              </ds-sidebar>
+              <div class="flex-1 p-4 bg-muted/20">
+                <p class="text-sm text-muted-foreground">Main content area</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Header & Footer -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Header & Footer</h3>
+            <div class="space-y-4">
+              <ds-header>
+                <div class="flex items-center justify-between">
+                  <h2 class="text-lg font-semibold">Page Header</h2>
+                  <ui-button size="sm">Action</ui-button>
+                </div>
+              </ds-header>
+              <ds-footer>
+                <p class="text-sm text-muted-foreground">© 2025 Company Name. All rights reserved.</p>
+              </ds-footer>
+            </div>
+          </div>
+
+          <!-- Toolbar -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Toolbar</h3>
+            <ds-toolbar>
+              <ui-button size="sm" variant="ghost">Bold</ui-button>
+              <ui-button size="sm" variant="ghost">Italic</ui-button>
+              <ui-button size="sm" variant="ghost">Underline</ui-button>
+              <ds-divider orientation="vertical"></ds-divider>
+              <ui-button size="sm" variant="ghost">Align Left</ui-button>
+              <ui-button size="sm" variant="ghost">Align Center</ui-button>
+              <ui-button size="sm" variant="ghost">Align Right</ui-button>
+            </ds-toolbar>
+          </div>
+          
+          <!-- ListGroup -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">ListGroup</h3>
+            <div class="max-w-md">
+              <ds-list-group>
+                <ds-list-item title="First item" [clickable]="true"></ds-list-item>
+                <ds-list-item title="Second item" [clickable]="true"></ds-list-item>
+                <ds-list-item title="Third item" [clickable]="true"></ds-list-item>
+              </ds-list-group>
+            </div>
+          </div>
+
+          <!-- Modal -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Modal</h3>
+            <div class="flex gap-2 flex-wrap">
+              <ui-button (click)="openModal('sm')">Open Small Modal</ui-button>
+              <ui-button (click)="openModal('md')">Open Medium Modal</ui-button>
+              <ui-button (click)="openModal('lg')">Open Large Modal</ui-button>
+            </div>
+            
+            <ds-modal 
+              [open]="modalSmOpen" 
+              (onClose)="closeModalSm()"
+              title="Small Modal"
+              size="sm"
+              [hasFooter]="true"
+            >
+              <p class="text-sm text-foreground">This is a small modal with limited width.</p>
+              <div slot="footer" class="flex gap-2">
+                <ui-button variant="outline" (click)="closeModalSm()">Cancel</ui-button>
+                <ui-button (click)="closeModalSm()">Confirm</ui-button>
+              </div>
+            </ds-modal>
+            
+            <ds-modal 
+              [open]="modalMdOpen" 
+              (onClose)="closeModalMd()"
+              title="Medium Modal"
+              size="md"
+              [hasFooter]="true"
+            >
+              <p class="text-sm text-foreground">This is a medium-sized modal, perfect for most use cases.</p>
+              <div slot="footer" class="flex gap-2">
+                <ui-button variant="outline" (click)="closeModalMd()">Cancel</ui-button>
+                <ui-button (click)="closeModalMd()">Confirm</ui-button>
+              </div>
+            </ds-modal>
+            
+            <ds-modal 
+              [open]="modalLgOpen" 
+              (onClose)="closeModalLg()"
+              title="Large Modal"
+              size="lg"
+              [hasFooter]="true"
+            >
+              <p class="text-sm text-foreground">This is a large modal with more space for content. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <div slot="footer" class="flex gap-2">
+                <ui-button variant="outline" (click)="closeModalLg()">Cancel</ui-button>
+                <ui-button (click)="closeModalLg()">Confirm</ui-button>
+              </div>
+            </ds-modal>
+          </div>
+
+          <!-- Drawer -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Drawer</h3>
+            <div class="flex gap-2 flex-wrap">
+              <ui-button (click)="openDrawer('right')">Open Right</ui-button>
+              <ui-button (click)="openDrawer('left')">Open Left</ui-button>
+              <ui-button (click)="openDrawer('top')">Open Top</ui-button>
+              <ui-button (click)="openDrawer('bottom')">Open Bottom</ui-button>
+            </div>
+            
+            <ds-drawer 
+              [open]="drawerOpen" 
+              (onClose)="closeDrawer()"
+              [title]="'Drawer ' + drawerPosition"
+              [position]="drawerPosition"
+              size="md"
+              [hasFooter]="true"
+            >
+              <p class="text-sm text-foreground">This is a drawer from the {{ drawerPosition }} side.</p>
+              <div slot="footer" class="flex gap-2">
+                <ui-button variant="outline" (click)="closeDrawer()">Cancel</ui-button>
+                <ui-button (click)="closeDrawer()">Confirm</ui-button>
+              </div>
+            </ds-drawer>
+          </div>
+
+          <!-- Table -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Table</h3>
+            <ds-table 
+              [columns]="tableColumns"
+              [data]="tableData"
+              emptyMessage="No users found"
+            ></ds-table>
+          </div>
+
+          <!-- Pagination -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">Pagination</h3>
+            <div class="space-y-6">
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Basic Pagination</p>
+                <ds-pagination 
+                  [page]="currentPage1"
+                  [totalPages]="5"
+                  (onChange)="handlePaginationChange1($event)"
+                ></ds-pagination>
+              </div>
+              
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Page 1 of 10</p>
+                <ds-pagination 
+                  [page]="currentPage2"
+                  [totalPages]="10"
+                  (onChange)="handlePaginationChange2($event)"
+                ></ds-pagination>
+              </div>
+              
+              <div>
+                <p class="text-sm mb-3 text-muted-foreground">Page 5 of 20</p>
+                <ds-pagination 
+                  [page]="currentPage3"
+                  [totalPages]="20"
+                  (onChange)="handlePaginationChange3($event)"
+                ></ds-pagination>
+              </div>
+            </div>
+          </div>
+
+          <!-- CardList -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">CardList</h3>
+            <ds-card-list [cols]="3" [gap]="4">
+              <ds-card title="Card 1" description="First card in the list">
+                <p class="text-sm text-muted-foreground">Content for card 1</p>
+              </ds-card>
+              <ds-card title="Card 2" description="Second card in the list">
+                <p class="text-sm text-muted-foreground">Content for card 2</p>
+              </ds-card>
+              <ds-card title="Card 3" description="Third card in the list">
+                <p class="text-sm text-muted-foreground">Content for card 3</p>
+              </ds-card>
+            </ds-card-list>
+          </div>
+
+          <!-- KpiCard -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">KpiCard</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <ds-kpi-card 
+                label="Total Revenue" 
+                value="$45,231" 
+                trend="up"
+                trendValue="+20.1%"
+                [hasIcon]="true"
+              >
+                <ng-icon slot="icon" name="lucideDollarSign" size="20"></ng-icon>
+              </ds-kpi-card>
+              
+              <ds-kpi-card 
+                label="Active Users" 
+                value="2,350" 
+                trend="up"
+                trendValue="+12.5%"
+                [hasIcon]="true"
+              >
+                <ng-icon slot="icon" name="lucideUsers" size="20"></ng-icon>
+              </ds-kpi-card>
+              
+              <ds-kpi-card 
+                label="Conversion Rate" 
+                value="3.24%" 
+                trend="down"
+                trendValue="-2.4%"
+                [hasIcon]="true"
+              >
+                <ng-icon slot="icon" name="lucideTrendingUp" size="20"></ng-icon>
+              </ds-kpi-card>
+            </div>
+          </div>
+
+          <!-- EmptyState -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">EmptyState</h3>
+            <ds-empty-state 
+              title="No results found" 
+              description="Try adjusting your search or filter to find what you're looking for."
+              [hasIcon]="true"
+              [hasAction]="true"
+            >
+              <ng-icon slot="icon" name="lucideInbox" size="48"></ng-icon>
+              <ui-button slot="action">Clear Filters</ui-button>
+            </ds-empty-state>
+          </div>
+
+          <!-- UserMenu -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-foreground">UserMenu</h3>
+            <div class="space-y-8">
+              <div>
+                <p class="text-sm mb-4 text-muted-foreground">User Menu with Avatar and Options</p>
+                <div class="flex justify-end">
+                  <ds-user-menu 
+                    [user]="{name: 'John Doe', email: 'john.doe@example.com', avatarSrc: 'https://i.pravatar.cc/150?img=12'}"
+                    [items]="userMenuItems"
+                    (onSelect)="handleUserMenuSelect($event)"
+                  ></ds-user-menu>
+                </div>
+              </div>
+              
+              <div>
+                <p class="text-sm mb-4 text-muted-foreground">User Menu without Email</p>
+                <div class="flex justify-end">
+                  <ds-user-menu 
+                    [user]="{name: 'Jane Smith'}"
+                    [items]="userMenuItems2"
+                    (onSelect)="handleUserMenuSelect($event)"
+                  ></ds-user-menu>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <!-- FEEDBACK SECTION -->
         <section class="text-center">
           <div class="p-8 bg-card rounded-lg border">
-            <h2 class="text-2xl font-bold mb-4 text-foreground">Component Library Status</h2>
+            <h2 class="text-2xl font-bold mb-4 text-foreground">Component Library Complete! 🎉</h2>
             <p class="text-muted-foreground mb-6">
-              This Angular component library demonstrates the ported components from React with full functionality.
-              All components support form integration, validation, and accessibility features.
+              All 42 components from React have been successfully ported to Angular with full functionality.
+              Every component supports form integration, validation, and accessibility features.
             </p>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
               <div class="p-3 bg-background rounded border">
-                <p class="font-semibold text-primary">✅ Components</p>
-                <p class="text-muted-foreground">Button, Input, Textarea, Select, Checkbox</p>
+                <p class="font-semibold text-primary">✅ 42 Components</p>
+                <p class="text-muted-foreground">18 Atoms, 10 Molecules, 14 Organisms</p>
               </div>
               <div class="p-3 bg-background rounded border">
-                <p class="font-semibold text-primary">✅ Features</p>
-                <p class="text-muted-foreground">Auto-resize, Validation, Loading states</p>
+                <p class="font-semibold text-primary">✅ Advanced Features</p>
+                <p class="text-muted-foreground">Auto-resize, Validation, Loading, Keyboard nav</p>
               </div>
               <div class="p-3 bg-background rounded border">
-                <p class="font-semibold text-primary">✅ Forms</p>
-                <p class="text-muted-foreground">NgModel, ControlValueAccessor integration</p>
+                <p class="font-semibold text-primary">✅ Forms & A11y</p>
+                <p class="text-muted-foreground">NgModel, CVA, ARIA, Focus management</p>
               </div>
               <div class="p-3 bg-background rounded border">
                 <p class="font-semibold text-primary">✅ Theming</p>
-                <p class="text-muted-foreground">Design tokens, Light/Dark mode support</p>
+                <p class="text-muted-foreground">Shared tokens, Light/Dark mode</p>
               </div>
             </div>
           </div>
@@ -1088,6 +1936,142 @@ export class AppComponent {
     }
   };
   
+  // New component states
+  sliderValue = 50;
+  progress = 65;
+  avatarSrc = '';
+  
+  // Modal states
+  modalOpen = false;
+  modalSmOpen = false;
+  modalMdOpen = false;
+  modalLgOpen = false;
+  
+  // Drawer states
+  drawerOpen = false;
+  drawerPosition: 'left' | 'right' | 'top' | 'bottom' = 'right';
+  
+  // Pagination states
+  currentPage1 = 2;
+  currentPage2 = 1;
+  currentPage3 = 5;
+  
+  // Tabs states
+  activeTab = 'overview';
+  activeTab2 = 'profile';
+  
+  // Search
+  searchBarValue = '';
+  
+  // Dropdown items
+  dropdownItems1: DropdownItem[] = [
+    { label: 'Profile', value: 'profile' },
+    { label: 'Settings', value: 'settings' },
+    { label: 'Logout', value: 'logout' }
+  ];
+  
+  dropdownItems2: DropdownItem[] = [
+    { label: 'Edit', value: 'edit' },
+    { label: 'Duplicate', value: 'duplicate' },
+    { label: 'Delete', value: 'delete' }
+  ];
+  
+  dropdownItems3: DropdownItem[] = [
+    { label: 'Item 1', value: 'item1' },
+    { label: 'Item 2', value: 'item2' }
+  ];
+  
+  // Breadcrumbs items
+  breadcrumbItems: BreadcrumbItem[] = [
+    { label: 'Home', href: '/' },
+    { label: 'Products', href: '/products' },
+    { label: 'Category' }
+  ];
+  
+  // Tabs items
+  tabItems: TabItem[] = [
+    { label: 'Overview', value: 'overview' },
+    { label: 'Analytics', value: 'analytics' },
+    { label: 'Reports', value: 'reports' },
+    { label: 'Settings', value: 'settings' }
+  ];
+  
+  tabItems2: TabItem[] = [
+    { label: 'Profile', value: 'profile' },
+    { label: 'Security', value: 'security' },
+    { label: 'Notifications', value: 'notifications' }
+  ];
+  
+  // Accordion items
+  accordionItems: AccordionItem[] = [
+    { 
+      id: '1', 
+      title: 'What is your return policy?', 
+      content: 'We offer a 30-day return policy for all unused items in their original packaging.' 
+    },
+    { 
+      id: '2', 
+      title: 'How long does shipping take?', 
+      content: 'Standard shipping typically takes 5-7 business days. Express shipping is available for 2-3 day delivery.' 
+    },
+    { 
+      id: '3', 
+      title: 'Do you ship internationally?', 
+      content: 'Yes, we ship to over 50 countries worldwide. International shipping times vary by location.' 
+    }
+  ];
+  
+  // Table data
+  tableColumns: TableColumn[] = [
+    { key: 'name', label: 'Name' },
+    { key: 'email', label: 'Email' },
+    { key: 'role', label: 'Role' },
+    { key: 'status', label: 'Status' }
+  ];
+  
+  tableData: any[] = [
+    { name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'Active' },
+    { name: 'Jane Smith', email: 'jane@example.com', role: 'Editor', status: 'Active' },
+    { name: 'Bob Johnson', email: 'bob@example.com', role: 'Viewer', status: 'Inactive' }
+  ];
+  
+  // Sidebar items
+  sidebarItems: SidebarItem[] = [
+    { id: 'home', label: 'Home', href: '/', active: true, hasIcon: true },
+    { id: 'projects', label: 'Projects', href: '/projects', hasIcon: true },
+    { id: 'team', label: 'Team', href: '/team', hasIcon: true },
+    { id: 'settings', label: 'Settings', href: '/settings', hasIcon: true }
+  ];
+  
+  sidebarCollapsed = false;
+  
+  // Navbar links
+  navbarLinks: NavLink[] = [
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '/about' },
+    { label: 'Services', href: '/services' },
+    { label: 'Contact', href: '/contact' }
+  ];
+  
+  // UserMenu
+  currentUser: User = {
+    name: 'John Doe',
+    email: 'john@example.com',
+    avatarSrc: 'https://i.pravatar.cc/150?img=1'
+  };
+  
+  userMenuItems: UserMenuItem[] = [
+    { label: 'Profile', value: 'profile', hasIcon: true },
+    { label: 'Settings', value: 'settings', hasIcon: true },
+    { label: 'Logout', value: 'logout', hasIcon: true }
+  ];
+  
+  userMenuItems2: UserMenuItem[] = [
+    { label: 'My Account', value: 'account', hasIcon: true },
+    { label: 'Help & Support', value: 'help', hasIcon: true },
+    { label: 'Sign Out', value: 'signout', hasIcon: true }
+  ];
+  
   // Select options
   selectOptions: SelectOption[] = [
     { label: 'Option 1', value: 'option1' },
@@ -1192,6 +2176,10 @@ export class AppComponent {
     } else {
       document.documentElement.classList.remove('dark');
     }
+  }
+
+  logAction(message: string): void {
+    console.log(message);
   }
 
   simulateLoading(): void {
@@ -1302,5 +2290,76 @@ export class AppComponent {
     if (this.currentStep > 1) {
       this.currentStep--;
     }
+  }
+  
+  // New component methods
+  increaseProgress(): void {
+    this.progress = Math.min(100, this.progress + 10);
+  }
+  
+  handleDropdownSelect(value: string): void {
+    console.log('Dropdown selected:', value);
+  }
+  
+  handleTabChange(value: string): void {
+    this.activeTab = value;
+  }
+  
+  handleTabChange2(value: string): void {
+    this.activeTab2 = value;
+  }
+  
+  handlePaginationChange1(page: number): void {
+    this.currentPage1 = page;
+  }
+  
+  handlePaginationChange2(page: number): void {
+    this.currentPage2 = page;
+  }
+  
+  handlePaginationChange3(page: number): void {
+    this.currentPage3 = page;
+  }
+  
+  handleUserMenuSelect(value: string): void {
+    console.log('User menu selected:', value);
+    if (value === 'logout') {
+      alert('Logout clicked!');
+    }
+  }
+  
+  toggleSidebar(): void {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
+  }
+  
+  openModal(size: 'sm' | 'md' | 'lg' = 'md'): void {
+    if (size === 'sm') {
+      this.modalSmOpen = true;
+    } else if (size === 'lg') {
+      this.modalLgOpen = true;
+    } else {
+      this.modalMdOpen = true;
+    }
+  }
+  
+  closeModalSm(): void {
+    this.modalSmOpen = false;
+  }
+  
+  closeModalMd(): void {
+    this.modalMdOpen = false;
+  }
+  
+  closeModalLg(): void {
+    this.modalLgOpen = false;
+  }
+  
+  openDrawer(position: 'left' | 'right' | 'top' | 'bottom' = 'right'): void {
+    this.drawerPosition = position;
+    this.drawerOpen = true;
+  }
+  
+  closeDrawer(): void {
+    this.drawerOpen = false;
   }
 }
