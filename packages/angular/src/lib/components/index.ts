@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+// Export all components
+export * from './atoms/button/button.component';
+export * from './atoms/input/input.component';
+export * from './atoms/textarea/textarea.component';
+export * from './atoms/select/select.component';
+export * from './atoms/checkbox/checkbox.component';
 
-@Component({
-  selector: 'lib-angular-component',
-  standalone: true,
-  template: ''
-})
-export class AngularComponent {}
+// Export types
+export type { ButtonVariant, ButtonSize } from './atoms/button/button.component';
+export type { ValidationType, ValidationRule } from './atoms/input/input.component';
+export type { SelectOption } from './atoms/select/select.component';

@@ -232,6 +232,9 @@ const App = () => {
               <Button variant="primary" size="lg">Primary Large</Button>
               <Button variant="secondary" size="md">Secondary</Button>
               <Button variant="ghost" size="md">Ghost</Button>
+              <Button variant="outline" size="md">Outline</Button>
+              <Button variant="destructive" size="md">Destructive</Button>
+              <Button variant="link" size="md">Link</Button>
               <Button variant="primary" size="md" loading>Loading</Button>
               <Button variant="primary" size="md" disabled>Disabled</Button>
             </div>
