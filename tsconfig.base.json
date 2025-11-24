@@ -15,12 +15,18 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@tokens/*": ["packages/tokens/src/*"],
-      "@utils/*": ["packages/utils/src/*"],
-      "@icons/*": ["packages/icons/src/*"],
-      "@react/*": ["packages/react/src/*"],
-      "@vue/*": ["packages/vue/src/*"],
-      "@angular/*": ["packages/angular/src/*"]
+      "@luisvelito/tokens": ["packages/tokens/src/index.ts"],
+      "@luisvelito/tokens/*": ["packages/tokens/src/*"],
+      "@luisvelito/utils": ["packages/utils/src/index.ts"],
+      "@luisvelito/utils/*": ["packages/utils/src/*"],
+      "@luisvelito/icons": ["packages/icons/src/index.ts"],
+      "@luisvelito/icons/*": ["packages/icons/src/*"],
+      "@luisvelito/react": ["packages/react/src/index.ts"],
+      "@luisvelito/react/*": ["packages/react/src/*"],
+      "@luisvelito/vue": ["packages/vue/src/index.ts"],
+      "@luisvelito/vue/*": ["packages/vue/src/*"],
+      "@luisvelito/angular": ["packages/angular/src/public-api.ts"],
+      "@luisvelito/angular/*": ["packages/angular/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

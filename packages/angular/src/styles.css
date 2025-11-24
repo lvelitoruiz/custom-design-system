@@ -1,0 +1,40 @@
+/* Import design system tokens */
+@import "@luisvelito/tokens/tokens.css";
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Angular-specific global styles */
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  /* Focus styles for better accessibility */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+}
+
+/* Component-specific utility classes */
+@layer components {
+  .component-focus {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  }
+  
+  .component-disabled {
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  
+  .component-transition {
+    @apply transition-colors duration-200;
+  }
+}
