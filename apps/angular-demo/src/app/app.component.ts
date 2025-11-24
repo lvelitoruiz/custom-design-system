@@ -1248,7 +1248,7 @@ import {
           <!-- Contact Form -->
           <div class="mb-12">
             <h3 class="text-xl font-semibold mb-4 text-foreground">Contact Form</h3>
-            <div class="max-w-2xl space-y-6 p-6 bg-card rounded-lg border">
+            <div class="max-w-2xl space-y-6">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-sm font-medium text-foreground mb-2">First Name</label>
@@ -1316,7 +1316,7 @@ import {
           <!-- Settings Form -->
           <div class="mb-12">
             <h3 class="text-xl font-semibold mb-4 text-foreground">Settings Form</h3>
-            <div class="max-w-2xl space-y-6 p-6 bg-card rounded-lg border">
+            <div class="max-w-2xl space-y-6">
               <div>
                 <label class="block text-sm font-medium text-foreground mb-2">Username</label>
                 <ui-input 
@@ -1404,7 +1404,7 @@ import {
           <!-- Search and Filters -->
           <div class="mb-12">
             <h3 class="text-xl font-semibold mb-4 text-foreground">Search and Filters</h3>
-            <div class="space-y-6 p-6 bg-card rounded-lg border">
+            <div class="space-y-6">
               <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <ui-input 
                   placeholder="Search..." 
@@ -1448,7 +1448,8 @@ import {
           <!-- Multi-step Form Preview -->
           <div class="mb-12">
             <h3 class="text-xl font-semibold mb-4 text-foreground">Multi-step Form Preview</h3>
-            <div class="space-y-6 p-6 bg-card rounded-lg border">
+            <ds-card padding="lg">
+              <div class="space-y-6">
               <div class="flex items-center justify-between mb-6">
                 <h4 class="text-lg font-medium text-foreground">Step {{ currentStep }} of {{ totalSteps }}</h4>
                 <div class="flex gap-2">
@@ -1537,7 +1538,8 @@ import {
                   {{ currentStep === totalSteps ? 'Submit' : 'Next' }}
                 </ui-button>
               </div>
-            </div>
+              </div>
+            </ds-card>
           </div>
         </section>
 

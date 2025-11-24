@@ -92,6 +92,20 @@ const App = () => {
     option3: false,
     option4: false
   });
+  const [multiStepForm, setMultiStepForm] = useState({
+    currentStep: 1,
+    totalSteps: 3,
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    contactMethod: '',
+    interests: {
+      technology: false,
+      design: false,
+      business: false
+    }
+  });
 
   // Helper functions for Phase 2
   const selectOptions = [
@@ -1256,6 +1270,157 @@ const App = () => {
                 </div>
               )}
             </div>
+          </div>
+          {/* Multi-step Form Preview */}
+          <div className="mb-12">
+            <h3 className="text-xl font-semibold mb-4 text-foreground">Multi-step Form Preview</h3>
+            <Card padding="lg">
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-lg font-medium text-foreground">Step {multiStepForm.currentStep} of {multiStepForm.totalSteps}</h4>
+                  <div className="flex gap-2">
+                    {[1, 2, 3].map((step) => (
+                      <div
+                        key={step}
+                        className={`w-8 h-1 rounded-full ${
+                          step < multiStepForm.currentStep
+                            ? 'bg-primary'
+                            : step === multiStepForm.currentStep
+                            ? 'bg-primary/50'
+                            : 'bg-muted'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Step 1: Personal Info */}
+                {multiStepForm.currentStep === 1 && (
+                  <div className="space-y-4">
+                    <h5 className="font-medium text-foreground">Personal Information</h5>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <FormField id="ms-firstName" label="First Name">
+                        <Input
+                          placeholder="John"
+                          value={multiStepForm.firstName}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMultiStepForm({ ...multiStepForm, firstName: e.target.value })}
+                        />
+                      </FormField>
+                      <FormField id="ms-lastName" label="Last Name">
+                        <Input
+                          placeholder="Doe"
+                          value={multiStepForm.lastName}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMultiStepForm({ ...multiStepForm, lastName: e.target.value })}
+                        />
+                      </FormField>
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 2: Contact Info */}
+                {multiStepForm.currentStep === 2 && (
+                  <div className="space-y-4">
+                    <h5 className="font-medium text-foreground">Contact Information</h5>
+                    <div className="space-y-4">
+                      <FormField id="ms-email" label="Email">
+                        <Input
+                          type="email"
+                          placeholder="john@example.com"
+                          value={multiStepForm.email}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMultiStepForm({ ...multiStepForm, email: e.target.value })}
+                        />
+                      </FormField>
+                      <FormField id="ms-phone" label="Phone">
+                        <Input
+                          type="tel"
+                          placeholder="+1 (555) 123-4567"
+                          value={multiStepForm.phone}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMultiStepForm({ ...multiStepForm, phone: e.target.value })}
+                        />
+                      </FormField>
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 3: Preferences */}
+                {multiStepForm.currentStep === 3 && (
+                  <div className="space-y-4">
+                    <h5 className="font-medium text-foreground">Preferences</h5>
+                    <div className="space-y-4">
+                      <FormField id="ms-contactMethod" label="Preferred Contact Method">
+                        <Select
+                          placeholder="Choose method..."
+                          options={[
+                            { label: 'Email', value: 'email' },
+                            { label: 'Phone', value: 'phone' },
+                            { label: 'SMS', value: 'sms' },
+                          ]}
+                          value={multiStepForm.contactMethod}
+                          onChange={(value) => setMultiStepForm({ ...multiStepForm, contactMethod: value })}
+                        />
+                      </FormField>
+                      <div className="space-y-3">
+                        <label className="block text-sm font-medium text-foreground">Interests</label>
+                        <Checkbox
+                          label="Technology"
+                          checked={multiStepForm.interests.technology}
+                          onChange={(checked) =>
+                            setMultiStepForm({
+                              ...multiStepForm,
+                              interests: { ...multiStepForm.interests, technology: checked },
+                            })
+                          }
+                        />
+                        <Checkbox
+                          label="Design"
+                          checked={multiStepForm.interests.design}
+                          onChange={(checked) =>
+                            setMultiStepForm({
+                              ...multiStepForm,
+                              interests: { ...multiStepForm.interests, design: checked },
+                            })
+                          }
+                        />
+                        <Checkbox
+                          label="Business"
+                          checked={multiStepForm.interests.business}
+                          onChange={(checked) =>
+                            setMultiStepForm({
+                              ...multiStepForm,
+                              interests: { ...multiStepForm.interests, business: checked },
+                            })
+                          }
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex justify-between pt-6">
+                  <Button
+                    variant="outline"
+                    onClick={() =>
+                      setMultiStepForm({ ...multiStepForm, currentStep: multiStepForm.currentStep - 1 })
+                    }
+                    disabled={multiStepForm.currentStep === 1}
+                  >
+                    Previous
+                  </Button>
+                  <Button
+                    variant="primary"
+                    onClick={() => {
+                      if (multiStepForm.currentStep === multiStepForm.totalSteps) {
+                        console.log('Form submitted:', multiStepForm);
+                      } else {
+                        setMultiStepForm({ ...multiStepForm, currentStep: multiStepForm.currentStep + 1 });
+                      }
+                    }}
+                  >
+                    {multiStepForm.currentStep === multiStepForm.totalSteps ? 'Submit' : 'Next'}
+                  </Button>
+                </div>
+              </div>
+            </Card>
           </div>
         </section>
 
