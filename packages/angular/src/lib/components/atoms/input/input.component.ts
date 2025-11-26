@@ -29,78 +29,80 @@ export interface ValidationRule {
     }
   `],
   template: `
-    <div [class]="wrapperClasses">
-      <!-- Left Icon -->
-      <span 
-        *ngIf="leftIcon" 
-        class="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-4 h-4 text-gray-500 dark:text-gray-400 pointer-events-none"
-        aria-hidden="true"
-      >
-        <ng-content select="[slot=leftIcon]"></ng-content>
-      </span>
-      
-      <!-- Input Element -->
-      <input
-        [type]="type"
-        [placeholder]="placeholder"
-        [disabled]="disabled || loading"
-        [value]="value"
-        [class]="inputClasses"
-        [attr.aria-invalid]="showError"
-        [attr.aria-disabled]="disabled"
-        [attr.aria-describedby]="hasValidationError ? inputId + '-error' : null"
-        (input)="onInputChange($event)"
-        (blur)="onBlur()"
-        (focus)="onFocus()"
-      />
-      
-      <!-- Right Icons Container -->
-      <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
-        <!-- Loading Spinner -->
-        <svg 
-          *ngIf="loading" 
-          class="w-4 h-4 text-gray-500 dark:text-gray-400 animate-spin" 
-          xmlns="http://www.w3.org/2000/svg" 
-          fill="none" 
-          viewBox="0 0 24 24"
-        >
-          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-        </svg>
-        
-        <!-- Clear Button -->
-        <button
-          *ngIf="clearable && value && !loading"
-          type="button"
-          (click)="clearValue()"
-          class="flex items-center justify-center w-4 h-4 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
-          aria-label="Clear input"
-          tabindex="-1"
-        >
-          <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-        
-        <!-- Right Icon -->
+    <div [class]="outerWrapperClasses">
+      <div [class]="wrapperClasses">
+        <!-- Left Icon -->
         <span 
-          *ngIf="rightIcon"
-          class="flex items-center justify-center w-4 h-4 text-gray-500 dark:text-gray-400 pointer-events-none"
+          *ngIf="leftIcon" 
+          class="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center text-gray-500 dark:text-gray-400 pointer-events-none z-10"
           aria-hidden="true"
         >
-          <ng-content select="[slot=rightIcon]"></ng-content>
+          <ng-content select="[slot=leftIcon]"></ng-content>
         </span>
+        
+        <!-- Input Element -->
+        <input
+          [type]="type"
+          [placeholder]="placeholder"
+          [disabled]="disabled || loading"
+          [value]="value"
+          [class]="inputClasses"
+          [attr.aria-invalid]="showError"
+          [attr.aria-disabled]="disabled"
+          [attr.aria-describedby]="hasValidationError ? inputId + '-error' : null"
+          (input)="onInputChange($event)"
+          (blur)="onBlur()"
+          (focus)="onFocus()"
+        />
+        
+        <!-- Right Icons Container -->
+        <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2 z-10">
+          <!-- Loading Spinner -->
+          <svg 
+            *ngIf="loading" 
+            class="w-4 h-4 text-gray-500 dark:text-gray-400 animate-spin" 
+            xmlns="http://www.w3.org/2000/svg" 
+            fill="none" 
+            viewBox="0 0 24 24"
+          >
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          
+          <!-- Clear Button -->
+          <button
+            *ngIf="clearable && value && !loading"
+            type="button"
+            (click)="clearValue()"
+            class="flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
+            aria-label="Clear input"
+            tabindex="-1"
+          >
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          
+          <!-- Right Icon -->
+          <span 
+            *ngIf="rightIcon"
+            class="flex items-center justify-center text-gray-500 dark:text-gray-400 pointer-events-none"
+            aria-hidden="true"
+          >
+            <ng-content select="[slot=rightIcon]"></ng-content>
+          </span>
+        </div>
       </div>
       
       <!-- Error Message -->
       <div
-        *ngIf="hasValidationError"
+        *ngIf="hasValidationError || error"
         [id]="inputId + '-error'"
-        class="absolute -bottom-5 left-0 text-xs text-red-500 dark:text-red-400"
+        class="mt-1 text-xs text-red-500 dark:text-red-400"
         role="alert"
         aria-live="polite"
       >
-        {{ errors[0] }}
+        {{ error || errors[0] }}
       </div>
     </div>
   `
@@ -292,10 +294,18 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnDestroy {
     return classes.filter(Boolean).join(' ');
   }
 
+  get outerWrapperClasses(): string {
+    const classes = [
+      'flex flex-col',
+      this.fullWidth ? 'w-full' : 'inline-flex w-full'
+    ];
+    return classes.filter(c => c).join(' ');
+  }
+
   get wrapperClasses(): string {
     const classes = [
       'relative',
-      this.fullWidth ? 'w-full' : 'inline-flex w-full'
+      this.fullWidth ? 'w-full' : 'w-full'
     ];
 
     return classes.join(' ');
