@@ -1,6 +1,6 @@
 {
   "name": "@luisvelito/angular",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Angular 17 components for the design system",
   "type": "module",
   "main": "./dist/index.js",

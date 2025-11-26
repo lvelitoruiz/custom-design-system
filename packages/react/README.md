@@ -1,74 +1,34 @@
 # @luisvelito/react
 
-Sistema de diseño completo construido con React, TypeScript y Tailwind CSS. Incluye componentes atómicos, moleculares y organismales siguiendo los principios de Atomic Design, con funcionalidades avanzadas como validación, auto-resize, navegación por teclado y dropdowns personalizados.
-
-## 🎨 Características
-
-- ✅ **Componentes completos**: Atoms, Molecules y Organisms
-- 🎯 **TypeScript**: Tipado completo para mejor experiencia de desarrollo
-- 🎨 **Tailwind CSS**: Estilos utilitarios con preset personalizado
-- 🌓 **Dark Mode**: Soporte completo para modo oscuro
-- ♿ **Accesible**: Cumple con los estándares WCAG
-- ⌨️ **Navegación por teclado**: Soporte completo en todos los componentes interactivos
-- 🔥 **Flowbite aesthetic**: Diseño moderno y limpio inspirado en Flowbite
-- 📦 **Tree-shakeable**: Solo importa lo que necesitas
+Componentes React del sistema de diseño Verve, construidos con TypeScript y Tailwind CSS.
 
 ## 📦 Instalación
 
 ```bash
-npm install @luisvelito/react @luisvelito/tokens
+npm install @luisvelito/react
 # o
-yarn add @luisvelito/react @luisvelito/tokens
+yarn add @luisvelito/react
 # o
-pnpm add @luisvelito/react @luisvelito/tokens
+pnpm add @luisvelito/react
 ```
 
-### Dependencias peer requeridas
+## 🚀 Uso Básico
 
-```bash
-npm install react react-dom tailwindcss lucide-react
+### 1. Importar Estilos
+
+```tsx
+// En tu archivo principal (App.tsx o main.tsx)
+import '@luisvelito/react/dist/styles.css';
 ```
 
-## ⚙️ Configuración
-
-### 1. Configurar Tailwind CSS
-
-Agrega el preset de tokens a tu `tailwind.config.js`:
-
-```js
-// tailwind.config.js
-module.exports = {
-  presets: [
-    require('@luisvelito/tokens/tailwind-preset')
-  ],
-  content: [
-    './src/**/*.{js,ts,jsx,tsx}',
-    './node_modules/@luisvelito/react/**/*.{js,ts,jsx,tsx}',
-  ],
-  // ... resto de tu configuración
-}
-```
-
-### 2. Importar estilos CSS
-
-Importa los tokens CSS en tu archivo de entrada principal:
-
-```css
-/* src/styles.css o src/index.css */
-@import "@luisvelito/tokens/tokens.css";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
-### 3. Usar los componentes
+### 2. Importar Componentes
 
 ```tsx
 import { Button, Input, Card } from '@luisvelito/react';
 
 function App() {
   return (
-    <Card title="Mi Aplicación">
+    <Card title="Bienvenido">
       <Input placeholder="Escribe algo..." />
       <Button variant="primary">Enviar</Button>
     </Card>
@@ -76,767 +36,343 @@ function App() {
 }
 ```
 
-## 🧩 Componentes Disponibles
+## 📚 Componentes Disponibles
 
-### ⚛️ Atoms (Componentes Básicos)
+### Atoms (18 componentes)
 
 #### Button
-Botón con múltiples variantes, tamaños y estado de carga.
 
 ```tsx
 import { Button } from '@luisvelito/react';
 
-<Button variant="primary" size="md">Click Me</Button>
-<Button variant="secondary" size="lg" loading>Loading...</Button>
-<Button variant="ghost" disabled>Disabled</Button>
+<Button variant="primary" size="md" onClick={() => console.log('Click!')}>
+  Click me
+</Button>
+
+// Variantes: primary, secondary, outline, ghost, danger, success
+// Tamaños: sm, md, lg
+// Props adicionales: disabled, loading, fullWidth, leftIcon, rightIcon
 ```
 
-**Props:**
-- `variant`: `'primary' | 'secondary' | 'ghost' | 'danger'`
-- `size`: `'sm' | 'md' | 'lg' | 'icon'`
-- `loading`: `boolean` - Muestra spinner de carga
-- `fullWidth`: `boolean` - Ocupa todo el ancho disponible
-
 #### Input
-Input con validación avanzada, estados de carga, clearable y debounce.
 
 ```tsx
 import { Input } from '@luisvelito/react';
 import { User } from 'lucide-react';
 
-// Input básico
-<Input placeholder="Nombre de usuario" />
-
-// Con validación email
-<Input 
-  placeholder="Email" 
+<Input
+  placeholder="Email"
+  type="email"
+  leftIcon={<User size={16} />}
   validation={[{ type: 'email', message: 'Email inválido' }]}
   validateOnBlur
-  onValidationChange={(valid, errors) => console.log(valid, errors)}
-/>
-
-// Con iconos y clearable
-<Input 
-  placeholder="Buscar..."
-  leftIcon={<User className="w-4 h-4" />}
   clearable
 />
-
-// Con loading y debounce
-<Input 
-  placeholder="Buscar con delay..."
-  loading={isLoading}
-  debounceMs={300}
-  onChange={(value) => console.log(value)}
-/>
 ```
-
-**Props avanzadas:**
-- `validation`: Array de reglas de validación (`email`, `url`, `number`, `phone`, o custom)
-- `validateOnChange`: Valida mientras el usuario escribe
-- `validateOnBlur`: Valida al perder el foco
-- `onValidationChange`: Callback con estado de validación
-- `loading`: Muestra spinner de carga
-- `clearable`: Muestra botón para limpiar el input
-- `debounceMs`: Retraso en milisegundos para el onChange
-- `leftIcon`: Icono a la izquierda
-- `rightIcon`: Icono a la derecha
-
-#### Textarea
-Textarea con auto-resize y control de redimensionamiento.
-
-```tsx
-import { Textarea } from '@luisvelito/react';
-
-// Básico
-<Textarea placeholder="Escribe tu mensaje..." />
-
-// Con auto-resize
-<Textarea 
-  placeholder="Se ajusta automáticamente" 
-  autoResize
-  minRows={2}
-  maxRows={6}
-/>
-
-// No redimensionable
-<Textarea 
-  placeholder="Tamaño fijo" 
-  resizable={false}
-/>
-```
-
-**Props:**
-- `autoResize`: Ajusta altura automáticamente según contenido
-- `minRows`: Número mínimo de filas (con autoResize)
-- `maxRows`: Número máximo de filas (con autoResize)
-- `resizable`: Permite redimensionar manualmente
 
 #### Select
-Select personalizado con búsqueda, teclado y múltiples opciones.
 
 ```tsx
 import { Select } from '@luisvelito/react';
 
 const options = [
-  { label: 'Opción 1', value: '1' },
-  { label: 'Opción 2', value: '2' },
-  { label: 'Opción 3 (Deshabilitada)', value: '3', disabled: true },
+  { label: 'Option 1', value: '1' },
+  { label: 'Option 2', value: '2' },
 ];
 
-// Select básico
 <Select
   options={options}
-  placeholder="Selecciona una opción"
-  onChange={(value) => console.log(value)}
-/>
-
-// Con búsqueda y clearable
-<Select
-  options={options}
-  placeholder="Buscar países..."
+  value={selectedValue}
+  onChange={setSelectedValue}
+  placeholder="Choose option..."
   searchable
   clearable
 />
-
-// Con loading
-<Select
-  options={options}
-  loading
-  disabled
-/>
-
-// Custom height para el menú
-<Select
-  options={options}
-  maxMenuHeight={200}
-/>
 ```
 
-**Props:**
-- `options`: Array de `{ label, value, disabled? }`
-- `searchable`: Habilita búsqueda con teclado
-- `clearable`: Muestra botón para limpiar selección
-- `loading`: Muestra spinner de carga
-- `maxMenuHeight`: Altura máxima del dropdown
-- `filterFunction`: Función personalizada para filtrar opciones
-- `renderOption`: Función para renderizar opciones personalizadas
-
-**Navegación por teclado:**
-- `ArrowDown/ArrowUp`: Navegar entre opciones
-- `Enter`: Seleccionar opción resaltada
-- `Escape`: Cerrar dropdown
-- `Typing`: Buscar opciones (con searchable)
-
 #### Checkbox
-Checkbox con estado indeterminado para "Select All".
 
 ```tsx
 import { Checkbox } from '@luisvelito/react';
 
-// Básico
-<Checkbox 
-  checked={isChecked}
-  onChange={setIsChecked}
-  label="Acepto los términos"
-/>
-
-// Indeterminado (para Select All)
 <Checkbox
-  checked={allSelected}
-  indeterminate={someSelected}
-  onChange={handleSelectAll}
-  label="Seleccionar todo"
+  label="Accept terms"
+  checked={accepted}
+  onChange={setAccepted}
 />
-
-// Inline
-<Checkbox checked={true} label="Opción" inline />
 ```
 
-**Props:**
-- `checked`: Estado actual
-- `onChange`: Callback que recibe el nuevo estado booleano
-- `indeterminate`: Estado indeterminado (visual)
-- `label`: Etiqueta del checkbox
-- `inline`: Muestra en línea en lugar de bloque
+#### Radio
 
-#### Radio, Switch, Slider
 ```tsx
-// Radio
-<Radio 
-  name="option" 
-  value="1" 
+import { Radio } from '@luisvelito/react';
+
+<Radio
+  name="option"
+  label="Option 1"
+  value="1"
   checked={selected === '1'}
   onChange={() => setSelected('1')}
-  label="Opción 1"
-/>
-
-// Switch
-<Switch 
-  checked={enabled}
-  onChange={setEnabled}
-  label="Habilitar notificaciones"
-  inline={false}
-/>
-
-// Slider
-<Slider
-  value={volume}
-  onChange={setVolume}
-  min={0}
-  max={100}
 />
 ```
 
-#### Badge, Tag, Chip
-```tsx
-// Badge
-<Badge variant="primary" size="md" rounded>New</Badge>
-
-// Tag (removable)
-<Tag 
-  variant="success" 
-  removable 
-  onRemove={() => console.log('Removed')}
->
-  React
-</Tag>
-
-// Chip
-<Chip 
-  label="Active" 
-  variant="primary"
-  onRemove={() => console.log('Removed')}
-/>
-```
-
-#### Progress, Avatar, Icon
-```tsx
-// Progress
-<Progress value={65} variant="primary" label="65% Complete" />
-
-// Avatar
-<Avatar 
-  size="md" 
-  src="https://i.pravatar.cc/150?img=1" 
-  alt="User"
-  fallback="JD"
-/>
-
-// Icon
-<Icon size={24}>
-  <Heart className="w-full h-full" />
-</Icon>
-```
-
-#### Skeleton, Spinner, Divider, KBD
-```tsx
-// Skeleton
-<Skeleton width="100%" height="20px" />
-<Skeleton variant="circular" width="60px" height="60px" />
-
-// Spinner
-<Spinner size="md" />
-
-// Divider
-<Divider orientation="horizontal" />
-
-// KBD (tecla de teclado)
-<KBD>Ctrl</KBD> + <KBD>K</KBD>
-```
-
----
-
-### 🧪 Molecules (Componentes Compuestos)
-
-#### FormField
-Wrapper para inputs con label, hint y error.
-
-```tsx
-import { FormField, Input } from '@luisvelito/react';
-
-<FormField
-  id="email"
-  label="Email"
-  hint="Ingresa tu email corporativo"
-  error="Este email ya está en uso"
-  required
->
-  <Input placeholder="email@example.com" />
-</FormField>
-```
+### Molecules (10 componentes)
 
 #### Card
-Tarjeta con header, footer y variantes de padding/shadow.
 
 ```tsx
 import { Card, Button } from '@luisvelito/react';
 
 <Card
-  title="Mi Tarjeta"
-  description="Descripción de la tarjeta"
+  title="My Card"
+  description="Card description"
   padding="md"
   shadow="sm"
-  header={<div>Header personalizado</div>}
+  header={<div>Header Content</div>}
   footer={
-    <div className="flex gap-2">
-      <Button variant="ghost">Cancelar</Button>
-      <Button variant="primary">Guardar</Button>
+    <div className="flex justify-end gap-2">
+      <Button variant="outline">Cancel</Button>
+      <Button variant="primary">Save</Button>
     </div>
   }
 >
-  <p>Contenido de la tarjeta</p>
+  Card content goes here
 </Card>
 ```
 
-#### InputGroup
-Agrupa inputs con addons (prefijos/sufijos).
+#### Alert
 
 ```tsx
-import { InputGroup, Input } from '@luisvelito/react';
+import { Alert } from '@luisvelito/react';
+import { Info } from 'lucide-react';
 
-// Con addon de texto
-<InputGroup leftAddon={<span>$</span>}>
-  <Input placeholder="0.00" />
-</InputGroup>
-
-// Con ambos addons
-<InputGroup 
-  leftAddon={<span>https://</span>}
-  rightAddon={<CheckCircle className="text-success" />}
->
-  <Input placeholder="example.com" />
-</InputGroup>
-```
-
-#### Alert, Breadcrumbs, Tabs, Accordion, SearchBar, Dropdown, ListItem
-
-```tsx
-// Alert
 <Alert
-  variant="success"
-  title="Éxito"
-  description="Los cambios se guardaron correctamente"
+  variant="info"
+  title="Information"
+  description="This is an informational message"
+  icon={<Info size={20} />}
   closable
   onClose={() => console.log('Closed')}
 />
+```
 
-// Breadcrumbs
-<Breadcrumbs
-  items={[
-    { label: 'Inicio', href: '/' },
-    { label: 'Productos', href: '/products' },
-    { label: 'Detalles' }
-  ]}
-/>
+#### Tabs
 
-// Tabs
+```tsx
+import { Tabs } from '@luisvelito/react';
+
+const tabs = [
+  { label: 'Overview', value: 'overview' },
+  { label: 'Settings', value: 'settings' },
+];
+
 <Tabs
-  tabs={[
-    { label: 'General', value: 'general' },
-    { label: 'Avanzado', value: 'advanced' }
-  ]}
+  tabs={tabs}
   value={activeTab}
   onChange={setActiveTab}
   fullWidth
 />
+```
 
-// Accordion
+#### Accordion
+
+```tsx
+import { Accordion } from '@luisvelito/react';
+
+const items = [
+  {
+    id: '1',
+    title: 'Question 1',
+    content: 'Answer 1'
+  },
+  {
+    id: '2',
+    title: 'Question 2',
+    content: 'Answer 2'
+  }
+];
+
 <Accordion
-  items={[
-    { id: '1', title: '¿Qué es esto?', content: 'Respuesta...' },
-    { id: '2', title: '¿Cómo funciona?', content: 'Respuesta...' }
-  ]}
-  multiple
+  items={items}
   defaultOpen={['1']}
-/>
-
-// SearchBar
-<SearchBar
-  value={search}
-  onChange={setSearch}
-  placeholder="Buscar..."
-/>
-
-// ListItem
-<ListItem
-  title="Configuración"
-  description="Administra tu cuenta"
-  leftIcon={<Settings />}
-  rightIcon={<ChevronRight />}
-  clickable
-  onClick={() => console.log('Clicked')}
+  multiple // Allow multiple open
 />
 ```
 
----
+### Organisms (14 componentes)
 
-### 🏗️ Organisms (Componentes Complejos)
+#### Modal
+
+```tsx
+import { Modal, Button } from '@luisvelito/react';
+
+const [open, setOpen] = useState(false);
+
+<>
+  <Button onClick={() => setOpen(true)}>Open Modal</Button>
+  
+  <Modal
+    open={open}
+    onClose={() => setOpen(false)}
+    title="Modal Title"
+    size="md"
+    footer={
+      <>
+        <Button variant="ghost" onClick={() => setOpen(false)}>Cancel</Button>
+        <Button variant="primary" onClick={handleSave}>Save</Button>
+      </>
+    }
+  >
+    <p>Modal content</p>
+  </Modal>
+</>
+```
 
 #### Navbar
+
 ```tsx
+import { Navbar, Button } from '@luisvelito/react';
+
 <Navbar
   logo={<span className="font-bold">Brand</span>}
   links={[
-    { label: 'Inicio', href: '/' },
-    { label: 'Productos', href: '/products' },
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '/about' },
   ]}
   rightContent={<Button size="sm">Sign In</Button>}
-  sticky
 />
 ```
 
 #### Sidebar
-```tsx
-<Sidebar
-  header={<span>My App</span>}
-  items={[
-    { 
-      id: 'dashboard', 
-      label: 'Dashboard', 
-      icon: <Home />, 
-      href: '#', 
-      active: true 
-    },
-    { id: 'settings', label: 'Settings', icon: <Settings />, href: '#' }
-  ]}
-  footer={<Button>Logout</Button>}
-  collapsed={false}
-/>
-```
 
-#### Modal
 ```tsx
-<Modal
-  open={isOpen}
-  onClose={() => setIsOpen(false)}
-  title="Confirmar acción"
-  size="md"
-  footer={
-    <>
-      <Button variant="ghost" onClick={() => setIsOpen(false)}>
-        Cancelar
-      </Button>
-      <Button variant="primary" onClick={handleConfirm}>
-        Confirmar
-      </Button>
-    </>
+import { Sidebar } from '@luisvelito/react';
+import { Home, Settings } from 'lucide-react';
+
+const items = [
+  {
+    id: 'home',
+    label: 'Home',
+    icon: <Home size={20} />,
+    href: '/',
+    active: true
+  },
+  {
+    id: 'settings',
+    label: 'Settings',
+    icon: <Settings size={20} />,
+    href: '/settings'
   }
->
-  <p>¿Estás seguro de realizar esta acción?</p>
-</Modal>
+];
+
+<Sidebar items={items} collapsed={false} />
 ```
-
-#### Drawer
-```tsx
-<Drawer
-  open={isOpen}
-  onClose={() => setIsOpen(false)}
-  position="right"
-  title="Configuración"
-  footer={<Button fullWidth>Guardar</Button>}
->
-  <p>Contenido del drawer</p>
-</Drawer>
-```
-
-#### Table, Pagination, CardList, KpiCard, EmptyState, UserMenu
-
-```tsx
-// Table
-<Table
-  columns={[
-    { key: 'name', label: 'Nombre' },
-    { key: 'email', label: 'Email' },
-  ]}
-  data={[
-    { name: 'Juan', email: 'juan@example.com' },
-  ]}
-/>
-
-// Pagination
-<Pagination
-  page={currentPage}
-  totalPages={10}
-  onChange={setCurrentPage}
-/>
-
-// KpiCard
-<KpiCard
-  label="Ventas Totales"
-  value="$45,231"
-  icon={<DollarSign />}
-  trend="up"
-  trendValue="+12.5%"
-/>
-
-// EmptyState
-<EmptyState
-  title="Sin datos"
-  description="No hay elementos para mostrar"
-  icon={<FileX />}
-  action={<Button>Crear nuevo</Button>}
-/>
-
-// UserMenu
-<UserMenu
-  user={{ 
-    name: "Juan Pérez", 
-    email: "juan@example.com",
-    avatarSrc: "https://..." 
-  }}
-  items={[
-    { label: 'Perfil', value: 'profile', icon: <User /> },
-    { label: 'Salir', value: 'logout', icon: <LogOut /> }
-  ]}
-  onSelect={(value) => console.log(value)}
-/>
-```
-
----
-
-## 🚀 Desarrollo en el Monorepo
-
-Si estás trabajando en el monorepo, puedes desarrollar y ver los cambios en tiempo real.
-
-### Estructura del proyecto
-
-```
-design-system/
-├── apps/
-│   └── react-demo/          # Aplicación de demo
-├── packages/
-│   ├── react/               # Componentes React
-│   │   ├── src/
-│   │   │   ├── components/  # Todos los componentes
-│   │   │   ├── hooks/       # Custom hooks
-│   │   │   └── tokens/      # Design tokens (colores, spacing, etc)
-│   │   └── dist/            # Archivos compilados
-│   └── tokens/              # Tokens compartidos (preset + CSS)
-│       ├── src/
-│       │   ├── tailwind-preset.js
-│       │   └── tokens.css
-│       └── dist/
-```
-
-### Comandos de desarrollo
-
-#### 1. Iniciar servidor de desarrollo
-
-Levanta la aplicación demo con hot reload:
-
-```bash
-npx nx serve react-demo
-# o
-npm run dev:react
-```
-
-La demo estará disponible en `http://localhost:4200`
-
-#### 2. Compilar el paquete React
-
-Compila todos los componentes a JavaScript y genera tipos TypeScript:
-
-```bash
-npx nx build react
-# o
-npm run build:react
-```
-
-Esto genera:
-- `packages/react/dist/index.esm.js` - Módulo ESM
-- `packages/react/dist/index.cjs.js` - Módulo CommonJS
-- `packages/react/dist/src/**/*.d.ts` - Definiciones TypeScript
-- `packages/react/dist/styles.css` - Estilos compilados
-
-#### 3. Compilar tokens
-
-Compila el paquete de tokens (preset de Tailwind + CSS):
-
-```bash
-npx nx build tokens
-# o
-npm run build:tokens
-```
-
-#### 4. Compilar todo
-
-Compila todos los paquetes del monorepo:
-
-```bash
-npx nx run-many --target=build --all
-# o
-npm run build
-```
-
-#### 5. Limpiar builds
-
-Elimina todos los archivos compilados:
-
-```bash
-rm -rf packages/react/dist packages/tokens/dist dist/
-```
-
-### Flujo de trabajo típico
-
-1. **Hacer cambios en los componentes**: Edita archivos en `packages/react/src/components/`
-
-2. **Ver cambios en la demo**: Si el servidor está corriendo (`nx serve react-demo`), verás los cambios inmediatamente gracias al hot reload.
-
-3. **Compilar para producción**: 
-   ```bash
-   npx nx build react
-   ```
-
-4. **Probar tipos TypeScript**: Después de compilar, verifica que los tipos generados sean correctos revisando `packages/react/dist/src/`.
-
-### Troubleshooting
-
-#### Los estilos no se aplican en la demo
-
-1. Verifica que `apps/react-demo/tailwind.config.js` tenga el preset correcto:
-   ```js
-   presets: [require('../../packages/tokens/src/tailwind-preset.js')]
-   ```
-
-2. Verifica que `apps/react-demo/src/styles.css` importe los tokens:
-   ```css
-   @import "../../../packages/tokens/src/tokens.css";
-   ```
-
-#### Error de tipos TypeScript
-
-1. Recompila el paquete React:
-   ```bash
-   npx nx build react
-   ```
-
-2. Recarga el servidor TypeScript:
-   - `Cmd+Shift+P` → "TypeScript: Restart TS Server"
-
-#### Error de módulos no encontrados
-
-Verifica que los aliases en `apps/react-demo/vite.config.ts` apunten correctamente:
-
-```ts
-resolve: {
-  alias: {
-    '@luisvelito/tokens/tailwind-preset': path.resolve(__dirname, '../../packages/tokens/src/tailwind-preset.js'),
-    '@luisvelito/tokens/tokens.css': path.resolve(__dirname, '../../packages/tokens/src/tokens.css'),
-    '@luisvelito/tokens': path.resolve(__dirname, '../../packages/tokens/src/index.ts'),
-    '@luisvelito/react': path.resolve(__dirname, '../../packages/react/src/index.ts'),
-  }
-}
-```
-
----
-
-## 📤 Publicación a NPM
-
-### Preparar para publicación
-
-1. **Compilar todos los paquetes**:
-   ```bash
-   npx nx run-many --target=build --all
-   ```
-
-2. **Verificar package.json**:
-   
-   **packages/react/package.json**:
-   ```json
-   {
-     "name": "@luisvelito/react",
-     "version": "1.0.0",
-     "main": "dist/index.cjs.js",
-     "module": "dist/index.esm.js",
-     "types": "dist/index.d.ts",
-     "exports": {
-       ".": {
-         "import": "./dist/index.esm.js",
-         "require": "./dist/index.cjs.js",
-         "types": "./dist/index.d.ts"
-       },
-       "./styles.css": "./dist/styles.css"
-     },
-     "files": ["dist", "README.md"],
-     "dependencies": {
-       "@luisvelito/tokens": "^1.0.0"
-     },
-     "peerDependencies": {
-       "react": "^18.0.0",
-       "react-dom": "^18.0.0",
-       "lucide-react": "^0.263.0"
-     }
-   }
-   ```
-
-   **packages/tokens/package.json**:
-   ```json
-   {
-     "name": "@luisvelito/tokens",
-     "version": "1.0.0",
-     "main": "dist/index.cjs.js",
-     "module": "dist/index.esm.js",
-     "types": "dist/index.d.ts",
-     "exports": {
-       ".": {
-         "import": "./dist/index.esm.js",
-         "require": "./dist/index.cjs.js",
-         "types": "./dist/index.d.ts"
-       },
-       "./tailwind-preset": "./dist/tailwind-preset.js",
-       "./tokens.css": "./dist/tokens.css"
-     },
-     "files": ["dist", "README.md"]
-   }
-   ```
-
-3. **Publicar**:
-   ```bash
-   cd packages/tokens
-   npm publish --access public
-   
-   cd ../react
-   npm publish --access public
-   ```
-
----
 
 ## 🎨 Personalización
 
-### Modificar colores y design tokens
+### Dark Mode
 
-Edita los archivos en `packages/tokens/src/`:
+El sistema soporta dark mode automáticamente:
 
-- `tokens.css` - Variables CSS (colores, radius, shadows)
-- `tailwind-preset.js` - Configuración de Tailwind
+```tsx
+// En tu componente principal
+useEffect(() => {
+  document.documentElement.classList.toggle('dark', isDark);
+}, [isDark]);
+```
+
+### Tailwind Config
+
+Extiende tu `tailwind.config.js`:
+
+```javascript
+module.exports = {
+  content: [
+    './src/**/*.{js,jsx,ts,tsx}',
+    './node_modules/@luisvelito/react/dist/**/*.js',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: 'hsl(var(--primary))',
+        secondary: 'hsl(var(--secondary))',
+        // ...más colores
+      },
+    },
+  },
+  plugins: [],
+};
+```
+
+### CSS Variables
 
 ```css
-/* tokens.css */
-@layer base {
-  :root {
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
-    --radius: 0.5rem;
-  }
+:root {
+  --primary: 222.2 47.4% 11.2%;
+  --secondary: 210 40% 96.1%;
+  --accent: 210 40% 96.1%;
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  /* ...más variables */
+}
+
+.dark {
+  --primary: 210 40% 98%;
+  --secondary: 217.2 32.6% 17.5%;
+  /* ...más variables */
 }
 ```
 
-### Crear componentes personalizados
+## 🔧 TypeScript
 
-Usa los componentes base para crear tus propios componentes:
+Todos los componentes están completamente tipados:
 
 ```tsx
-import { Button, Card, Input } from '@luisvelito/react';
+import { ButtonProps, InputProps, CardProps } from '@luisvelito/react';
 
-export function LoginCard() {
+// Props tipadas automáticamente
+const MyButton: React.FC<{ customProp: string }> = ({ customProp }) => {
+  return <Button variant="primary">{customProp}</Button>;
+};
+```
+
+## 📖 Ejemplos Completos
+
+### Formulario de Login
+
+```tsx
+import { Card, FormField, Input, Button } from '@luisvelito/react';
+import { Mail, Lock } from 'lucide-react';
+
+function LoginForm() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
-    <Card title="Iniciar Sesión" padding="lg">
+    <Card title="Login" className="max-w-md mx-auto">
       <div className="space-y-4">
-        <Input placeholder="Email" />
-        <Input type="password" placeholder="Contraseña" />
+        <FormField label="Email" required>
+          <Input
+            type="email"
+            placeholder="tu@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            leftIcon={<Mail size={16} />}
+          />
+        </FormField>
+        
+        <FormField label="Password" required>
+          <Input
+            type="password"
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            leftIcon={<Lock size={16} />}
+          />
+        </FormField>
+        
         <Button variant="primary" fullWidth>
-          Ingresar
+          Sign In
         </Button>
       </div>
     </Card>
@@ -844,24 +380,48 @@ export function LoginCard() {
 }
 ```
 
----
+### Dashboard Layout
 
-## 📝 Licencia
+```tsx
+import { Navbar, Sidebar, Card, KpiCard } from '@luisvelito/react';
+import { DollarSign, Users } from 'lucide-react';
 
-MIT
-
----
+function Dashboard() {
+  return (
+    <div className="h-screen flex flex-col">
+      <Navbar logo={<span className="font-bold">Dashboard</span>} />
+      
+      <div className="flex flex-1">
+        <Sidebar items={sidebarItems} />
+        
+        <main className="flex-1 p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <KpiCard
+              label="Revenue"
+              value="$45,231"
+              icon={<DollarSign size={24} />}
+              trend="up"
+              trendValue="+12.5%"
+            />
+            <KpiCard
+              label="Users"
+              value="1,234"
+              icon={<Users size={24} />}
+              trend="up"
+              trendValue="+8.2%"
+            />
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}
+```
 
 ## 🤝 Contribuir
 
-1. Fork el repositorio
-2. Crea una rama para tu feature (`git checkout -b feature/amazing-feature`)
-3. Commit tus cambios (`git commit -m 'Add amazing feature'`)
-4. Push a la rama (`git push origin feature/amazing-feature`)
-5. Abre un Pull Request
+Ver [Guía de Desarrollo](../../DEVELOPMENT.md)
 
----
+## 📄 Licencia
 
-## 📞 Soporte
-
-Si encuentras algún problema o tienes preguntas, abre un issue en el repositorio.
+MIT © Luis Velito

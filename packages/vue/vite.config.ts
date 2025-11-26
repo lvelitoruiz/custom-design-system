@@ -1,9 +1,26 @@
 import { defineConfig } from 'vite';
 import vuePlugin from '@vitejs/plugin-vue';
 import { resolve } from 'path';
+import { copyFileSync } from 'fs';
 
 export default defineConfig({
-  plugins: [vuePlugin()],
+  plugins: [
+    vuePlugin(),
+    {
+      name: 'copy-files',
+      closeBundle() {
+        // Copiar package.json y README.md al dist
+        copyFileSync(
+          resolve(__dirname, 'package.json'),
+          resolve(__dirname, '../../dist/packages/vue/package.json')
+        );
+        copyFileSync(
+          resolve(__dirname, 'README.md'),
+          resolve(__dirname, '../../dist/packages/vue/README.md')
+        );
+      },
+    },
+  ],
   build: {
     outDir: '../../dist/packages/vue',
     lib: {
