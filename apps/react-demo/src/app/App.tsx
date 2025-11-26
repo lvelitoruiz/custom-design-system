@@ -240,17 +240,67 @@ const App = () => {
           {/* Button */}
           <div className="mb-12">
             <h3 className="text-xl font-semibold mb-4 text-foreground">Button</h3>
-            <div className="flex flex-wrap gap-4">
-              <Button variant="primary" size="sm">Primary Small</Button>
-              <Button variant="primary" size="md">Primary Medium</Button>
-              <Button variant="primary" size="lg">Primary Large</Button>
-              <Button variant="secondary" size="md">Secondary</Button>
-              <Button variant="ghost" size="md">Ghost</Button>
-              <Button variant="outline" size="md">Outline</Button>
-              <Button variant="destructive" size="md">Destructive</Button>
-              <Button variant="link" size="md">Link</Button>
-              <Button variant="primary" size="md" loading>Loading</Button>
-              <Button variant="primary" size="md" disabled>Disabled</Button>
+            
+            {/* Variants */}
+            <div className="mb-6">
+              <h4 className="text-lg font-medium text-foreground mb-3">Variantes</h4>
+              <div className="flex flex-wrap gap-4">
+                <Button variant="primary">Primary</Button>
+                <Button variant="secondary">Secondary</Button>
+                <Button variant="outline">Outline</Button>
+                <Button variant="ghost">Ghost</Button>
+                <Button variant="destructive">Destructive</Button>
+                <Button variant="link">Link</Button>
+              </div>
+            </div>
+
+            {/* Sizes */}
+            <div className="mb-6">
+              <h4 className="text-lg font-medium text-foreground mb-3">Tamaños</h4>
+              <div className="flex flex-wrap gap-4 items-center">
+                <Button size="sm">Small</Button>
+                <Button size="md">Medium</Button>
+                <Button size="lg">Large</Button>
+              </div>
+            </div>
+
+            {/* States */}
+            <div className="mb-6">
+              <h4 className="text-lg font-medium text-foreground mb-3">Estados</h4>
+              <div className="flex flex-wrap gap-4">
+                <Button>Normal</Button>
+                <Button loading>Loading</Button>
+                <Button disabled>Disabled</Button>
+              </div>
+            </div>
+
+            {/* With Icons */}
+            <div className="mb-6">
+              <h4 className="text-lg font-medium text-foreground mb-3">Con íconos</h4>
+              <div className="flex flex-wrap gap-4">
+                <Button leftIcon={<User className="w-4 h-4" />}>
+                  Con ícono izquierdo
+                </Button>
+                <Button variant="secondary" rightIcon={
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                  </svg>
+                }>
+                  Con ícono derecho
+                </Button>
+                <Button variant="outline" leftIcon={<Heart className="w-4 h-4" />}>
+                  Like
+                </Button>
+              </div>
+            </div>
+
+            {/* Full width */}
+            <div className="mb-6">
+              <h4 className="text-lg font-medium text-foreground mb-3">Ancho completo</h4>
+              <div className="space-y-3">
+                <Button fullWidth>Full Width Primary</Button>
+                <Button variant="outline" fullWidth>Full Width Outline</Button>
+              </div>
             </div>
           </div>
 

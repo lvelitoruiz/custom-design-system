@@ -5,15 +5,11 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nx/rollup:rollup",
-      "outputs": ["{options.outputPath}"],
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/dist/packages/vue"],
       "options": {
-        "outputPath": "dist/packages/vue",
-        "main": "packages/vue/src/index.ts",
-        "tsConfig": "packages/vue/tsconfig.lib.json",
-        "generateExportsField": true,
-        "format": ["esm", "cjs"],
-        "external": ["vue"]
+        "command": "vite build",
+        "cwd": "packages/vue"
       }
     },
     "lint": {

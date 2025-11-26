@@ -119,53 +119,55 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     );
 
     const wrapperElement = (
-      <div className={cn('relative', fullWidth ? 'w-full' : 'inline-flex w-full')}>
-        {leftIcon && (
-          <span
-            className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-4 h-4 text-gray-500 dark:text-gray-400 pointer-events-none"
-            aria-hidden="true"
-          >
-            {leftIcon}
-          </span>
-        )}
-        
-        {inputElement}
-        
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
-          {loading && (
-            <Loader2 className="w-4 h-4 text-gray-500 dark:text-gray-400 animate-spin" />
-          )}
-          
-          {clearable && value && !loading && (
-            <button
-              type="button"
-              onClick={handleClear}
-              className="flex items-center justify-center w-4 h-4 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
-              aria-label="Clear input"
-              tabIndex={-1}
-            >
-              <X className="w-3 h-3" />
-            </button>
-          )}
-          
-          {rightIcon && (
+      <div className={cn(fullWidth ? 'w-full' : 'inline-flex w-full', 'flex flex-col')}>
+        <div className={cn('relative', fullWidth ? 'w-full' : 'w-full')}>
+          {leftIcon && (
             <span
-              className="flex items-center justify-center w-4 h-4 text-gray-500 dark:text-gray-400 pointer-events-none"
+              className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center text-gray-500 dark:text-gray-400 pointer-events-none z-10"
               aria-hidden="true"
             >
-              {rightIcon}
+              {leftIcon}
             </span>
           )}
+          
+          {inputElement}
+          
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2 z-10">
+            {loading && (
+              <Loader2 className="w-4 h-4 text-gray-500 dark:text-gray-400 animate-spin" />
+            )}
+            
+            {clearable && value && !loading && (
+              <button
+                type="button"
+                onClick={handleClear}
+                className="flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
+                aria-label="Clear input"
+                tabIndex={-1}
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+            
+            {rightIcon && (
+              <span
+                className="flex items-center justify-center text-gray-500 dark:text-gray-400 pointer-events-none"
+                aria-hidden="true"
+              >
+                {rightIcon}
+              </span>
+            )}
+          </div>
         </div>
         
-        {hasValidationError && (
+        {(hasValidationError || error) && (
           <div
             id={`${props.id}-error`}
-            className="absolute -bottom-5 left-0 text-xs text-red-500 dark:text-red-400"
+            className="mt-1 text-xs text-red-500 dark:text-red-400"
             role="alert"
             aria-live="polite"
           >
-            {errors[0]}
+            {error || errors[0]}
           </div>
         )}
       </div>

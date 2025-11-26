@@ -222,17 +222,68 @@ import {
           <!-- Button -->
           <div class="mb-12">
             <h3 class="text-xl font-semibold mb-4 text-foreground">Button</h3>
-            <div class="flex flex-wrap gap-4">
-              <ui-button variant="primary" size="sm">Primary Small</ui-button>
-              <ui-button variant="primary" size="md">Primary Medium</ui-button>
-              <ui-button variant="primary" size="lg">Primary Large</ui-button>
-              <ui-button variant="secondary" size="md">Secondary</ui-button>
-              <ui-button variant="ghost" size="md">Ghost</ui-button>
-              <ui-button variant="outline" size="md">Outline</ui-button>
-              <ui-button variant="destructive" size="md">Destructive</ui-button>
-              <ui-button variant="link" size="md">Link</ui-button>
-              <ui-button variant="primary" size="md" [loading]="true">Loading</ui-button>
-              <ui-button variant="primary" size="md" [disabled]="true">Disabled</ui-button>
+            
+            <!-- Variants -->
+            <div class="mb-6">
+              <h4 class="text-lg font-medium text-foreground mb-3">Variantes</h4>
+              <div class="flex flex-wrap gap-4">
+                <ui-button variant="primary">Primary</ui-button>
+                <ui-button variant="secondary">Secondary</ui-button>
+                <ui-button variant="outline">Outline</ui-button>
+                <ui-button variant="ghost">Ghost</ui-button>
+                <ui-button variant="destructive">Destructive</ui-button>
+                <ui-button variant="link">Link</ui-button>
+              </div>
+            </div>
+
+            <!-- Sizes -->
+            <div class="mb-6">
+              <h4 class="text-lg font-medium text-foreground mb-3">Tamaños</h4>
+              <div class="flex flex-wrap gap-4 items-center">
+                <ui-button size="sm">Small</ui-button>
+                <ui-button size="md">Medium</ui-button>
+                <ui-button size="lg">Large</ui-button>
+              </div>
+            </div>
+
+            <!-- States -->
+            <div class="mb-6">
+              <h4 class="text-lg font-medium text-foreground mb-3">Estados</h4>
+              <div class="flex flex-wrap gap-4">
+                <ui-button>Normal</ui-button>
+                <ui-button [loading]="true">Loading</ui-button>
+                <ui-button [disabled]="true">Disabled</ui-button>
+              </div>
+            </div>
+
+            <!-- With Icons -->
+            <div class="mb-6">
+              <h4 class="text-lg font-medium text-foreground mb-3">Con íconos</h4>
+              <div class="flex flex-wrap gap-4">
+                <ui-button>
+                  <ng-icon slot="leftIcon" name="lucideUser" size="16"></ng-icon>
+                  Con ícono izquierdo
+                </ui-button>
+                <ui-button variant="secondary">
+                  Con ícono derecho
+                  <svg slot="rightIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                  </svg>
+                </ui-button>
+                <ui-button variant="outline">
+                  <ng-icon slot="leftIcon" name="lucideHeart" size="16"></ng-icon>
+                  Like
+                </ui-button>
+              </div>
+            </div>
+
+            <!-- Full width -->
+            <div class="mb-6">
+              <h4 class="text-lg font-medium text-foreground mb-3">Ancho completo</h4>
+              <div class="space-y-3">
+                <ui-button [fullWidth]="true">Full Width Primary</ui-button>
+                <ui-button variant="outline" [fullWidth]="true">Full Width Outline</ui-button>
+              </div>
             </div>
           </div>
 
